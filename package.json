@@ -2,13 +2,19 @@
   "name": "jstransformer",
   "version": "0.0.0",
   "description": "Normalize the API of any jstransformer",
-  "keywords": [],
+  "keywords": [
+    "jstransformer"
+  ],
   "dependencies": {
     "promise": "^6.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "istanbul": "^0.3.5",
+    "testit": "^1.2.0"
+  },
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "coverage": "istanbul cover test/index.js"
   },
   "repository": {
     "type": "git",
