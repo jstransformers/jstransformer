@@ -28,10 +28,28 @@ test('compileClient - without tr.compileClient', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
+    compileClientAsync: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.compileClient('example input', {});
+  }, /does not support compiling for the client synchronously/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compileFileClient: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.compileClient('example input', {});
+  }, /does not support compiling for the client from a string/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
     compileFile: function () {
     }
   });
   assert.throws(function () {
     tr.compileClient('example input', {});
-  }, /does not support/);
+  }, /does not support compiling for the client/);
 });

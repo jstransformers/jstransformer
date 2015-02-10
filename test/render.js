@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
@@ -59,10 +60,43 @@ test('render - without tr.render', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
+    compileAsync: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.render('example input', {});
+  }, /does not support rendering synchronously/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compileFileAsync: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.render('example input', {});
+  }, /does not support rendering from a string/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
     compileClient: function () {
     }
   });
   assert.throws(function () {
     tr.render('example input', {});
-  }, /does not support/);
+  }, /does not support rendering/);
+  assert.throws(function () {
+    tr.render('example input', {});
+  }, /does not support rendering/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compile: function () {
+      return function () {
+        return Promise.resolve('foo');
+      };
+    }
+  });
+  assert.throws(function () {
+    tr.render('example input', {});
+  }, /does not support rendering synchronously/);
 });

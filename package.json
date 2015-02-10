@@ -6,6 +6,7 @@
     "jstransformer"
   ],
   "dependencies": {
+    "is-promise": "^2.0.0",
     "promise": "^6.0.1"
   },
   "devDependencies": {

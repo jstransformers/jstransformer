@@ -3,6 +3,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var Promise = require('promise');
+var isPromise = require('is-promise');
 
 var tr = (module.exports = function (transformer) {
   return new Transformer(transformer);
@@ -15,9 +16,6 @@ tr.normalizeAsync = normalizeAsync;
 tr.readFile = Promise.denodeify(fs.readFile);
 tr.readFileSync = fs.readFileSync;
 
-function isPromise(value) {
-  return value && (typeof value === 'object' || typeof value === 'function') && typeof value.then === 'function';
-}
 function normalizeFn(result) {
   if (typeof result === 'function') {
     return {fn: result, dependencies: []};
@@ -98,38 +96,81 @@ function Transformer(tr) {
   this.outputFormat = this._tr.outputFormat;
 }
 
+var fallbacks = {
+  compile: ['compile'],
+  compileAsync: ['compileAsync', 'compile'],
+  compileFile: ['compileFile', 'compile'],
+  compileFileAsync: ['compileFileAsync', 'compileFile', 'compileAsync', 'compile'],
+  compileClient: ['compileClient'],
+  compileClientAsync: ['compileClientAsync', 'compileClient'],
+  compileFileClient: ['compileFileClient', 'compileClient'],
+  compileFileClientAsync: [
+    'compileFileClientAsync', 'compileFileClient', 'compileClientAsync', 'compileClient'
+  ],
+  render: ['render', 'compile'],
+  renderAsync: ['renderAsync', 'render', 'compileAsync', 'compile'],
+  renderFile: ['renderFile', 'render', 'compileFile', 'compile'],
+  renderFileAsync: [
+    'renderFileAsync', 'renderFile', 'renderAsync', 'render',
+    'compileFileAsync', 'compileFile', 'compileAsync', 'compile'
+  ]
+};
+
 Transformer.prototype._hasMethod = function (method) {
   return typeof this._tr[method] === 'function';
+};
+Transformer.prototype.can = function (method) {
+  return fallbacks[method].some(function (method) {
+    return this._hasMethod(method);
+  }.bind(this));
 };
 
 /* COMPILE */
 
 Transformer.prototype.compile = function (str, options) {
-  if (this._hasMethod('compile')) {
-    return tr.normalizeFn(this._tr.compile(str, options));
-  } else {
-    throw new Error('This transform does not support synchronous compiling of plain strings');
+  if (!this.can('compile')) {
+    if (this.can('compileAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
+    } else if (this.can('compileFileAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support compiling plain strings');
+    } else {
+      throw new Error('The Transform "' + this.name + '" does not support compilation');
+    }
   }
+  return tr.normalizeFn(this._tr.compile(str, options));
 };
 Transformer.prototype.compileAsync = function (str, options, cb) {
+  if (!this.can('compileAsync')) {
+    if (this.can('compileFileAsync')) {
+      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
+    } else {
+      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compilation')).nodeify(cb);
+    }
+  }
   if (this._hasMethod('compileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileAsync(str, options), cb);
-  } else if (this._hasMethod('compile')) {
-    return tr.normalizeFnAsync(this._tr.compile(str, options), cb);
   } else {
-    return Promise.reject(new Error('This transform does not support compiling plain strings')).nodeify(cb);
+    return tr.normalizeFnAsync(this._tr.compile(str, options), cb);
   }
 };
 Transformer.prototype.compileFile = function (filename, options) {
+  if (!this.can('compileFile')) {
+    if (this.can('compileFileAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
+    } else {
+      throw new Error('The Transform "' + this.name + '" does not support compilation');
+    }
+  }
   if (this._hasMethod('compileFile')) {
     return tr.normalizeFn(this._tr.compileFile(filename, options));
-  } else if (this._hasMethod('compile')) {
-    return tr.normalizeFn(this._tr.compile(tr.readFileSync(filename, 'utf8'), options));
   } else {
-    throw new Error('This transform does not support synchronous compiling');
+    return tr.normalizeFn(this._tr.compile(tr.readFileSync(filename, 'utf8'), options));
   }
 };
 Transformer.prototype.compileFileAsync = function (filename, options, cb) {
+  if (!this.can('compileFileAsync')) {
+    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compilation'));
+  }
   if (this._hasMethod('compileFileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileFileAsync(filename, options), cb);
   } else if (this._hasMethod('compileFile')) {
@@ -138,10 +179,8 @@ Transformer.prototype.compileFileAsync = function (filename, options, cb) {
     return tr.normalizeFnAsync(tr.readFile(filename, 'utf8').then(function (str) {
       if (this._hasMethod('compileAsync')) {
         return this._tr.compileAsync(str, options);
-      } else if (this._hasMethod('compile')) {
-        return this._tr.compile(str, options);
       } else {
-        throw new Error('Transform does not support compiling');
+        return this._tr.compile(str, options);
       }
     }.bind(this)), cb);
   }
@@ -151,31 +190,49 @@ Transformer.prototype.compileFileAsync = function (filename, options, cb) {
 
 
 Transformer.prototype.compileClient = function (str, options) {
-  if (this._hasMethod('compileClient')) {
-    return tr.normalize(this._tr.compileClient(str, options));
-  } else {
-    throw new Error('This transform does not support compile client plain strings');
+  if (!this.can('compileClient')) {
+    if (this.can('compileClientAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support compiling for the client synchronously.');
+    } else if (this.can('compileFileClientAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support compiling for the client from a string.');
+    } else {
+      throw new Error('The Transform "' + this.name + '" does not support compiling for the client');
+    }
   }
+  return tr.normalize(this._tr.compileClient(str, options));
 };
 Transformer.prototype.compileClientAsync = function (str, options, cb) {
+  if (!this.can('compileClientAsync')) {
+    if (this.can('compileFileClientAsync')) {
+      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client from a string.')).nodeify(cb);
+    } else {
+      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client')).nodeify(cb);
+    }
+  }
   if (this._hasMethod('compileClientAsync')) {
     return tr.normalizeAsync(this._tr.compileClientAsync(str, options), cb);
-  } else if (this._hasMethod('compileClient')) {
-    return tr.normalizeAsync(this._tr.compileClient(str, options), cb);
   } else {
-    return Promise.reject(new Error('This transform does not support compile client'));
+    return tr.normalizeAsync(this._tr.compileClient(str, options), cb);
   }
 };
 Transformer.prototype.compileFileClient = function (filename, options) {
+  if (!this.can('compileFileClient')) {
+    if (this.can('compileFileClientAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support compiling for the client synchronously.');
+    } else {
+      throw new Error('The Transform "' + this.name + '" does not support compiling for the client');
+    }
+  }
   if (this._hasMethod('compileFileClient')) {
     return tr.normalize(this._tr.compileFileClient(filename, options));
-  } else if (this._hasMethod('compileClient')) {
-    return tr.normalize(this._tr.compileClient(tr.readFileSync(filename, 'utf8'), options));
   } else {
-    throw new Error('This transform does not support synchronous compiling to client');
+    return tr.normalize(this._tr.compileClient(tr.readFileSync(filename, 'utf8'), options));
   }
 };
 Transformer.prototype.compileFileClientAsync = function (filename, options, cb) {
+  if (!this.can('compileFileClientAsync')) {
+    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client')).nodeify(cb)
+  }
   if (this._hasMethod('compileFileClientAsync')) {
     return tr.normalizeAsync(this._tr.compileFileClientAsync(filename, options), cb);
   } else if (this._hasMethod('compileFileClient')) {
@@ -184,10 +241,8 @@ Transformer.prototype.compileFileClientAsync = function (filename, options, cb) 
     return tr.normalizeAsync(tr.readFile(filename, 'utf8').then(function (str) {
       if (this._hasMethod('compileClientAsync')) {
         return this._tr.compileClientAsync(str, options);
-      } else if (this._hasMethod('compileClient')) {
-        return this._tr.compileClient(str, options);
       } else {
-        throw new Error('Transform does not support compileFileClientAsync');
+        return this._tr.compileClient(str, options);
       }
     }.bind(this)), cb);
   }
@@ -196,17 +251,24 @@ Transformer.prototype.compileFileClientAsync = function (filename, options, cb) 
 /* RENDER */
 
 Transformer.prototype.render = function (str, options, locals) {
+  if (!this.can('render')) {
+    if (this.can('renderAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support rendering synchronously.');
+    } else if (this.can('renderFileAsync')) {
+      throw new Error('The Transform "' + this.name + '" does not support rendering from a string.');
+    } else {
+      throw new Error('The Transform "' + this.name + '" does not support rendering');
+    }
+  }
   if (this._hasMethod('render')) {
     return tr.normalize(this._tr.render(str, options, locals));
-  } else if (this._hasMethod('compile')) {
+  } else {
     var compiled = tr.normalizeFn(this._tr.compile(str, options));
     var body = compiled.fn(options || locals);
     if (typeof body !== 'string') {
-      throw new Error('This transform does not support synchronous rendering');
+      throw new Error('The Transform "' + this.name + '" does not support rendering synchronously.');
     }
     return tr.normalize({body: body, dependencies: compiled.dependencies});
-  } else {
-    throw new Error('This transform does not support rendering plain strings');
   }
 };
 Transformer.prototype.renderAsync = function (str, options, locals, cb) {
@@ -214,16 +276,21 @@ Transformer.prototype.renderAsync = function (str, options, locals, cb) {
     cb = locals;
     locals = options;
   }
+  if (!this.can('renderAsync')) {
+    if (this.can('renderFileAsync')) {
+      return Promise.reject(new Error('The Transform "' + this.name + '" does not support rendering from a string.')).nodeify(cb);
+    } else {
+      return Promise.reject(new Error('The Transform "' + this.name + '" does not support rendering')).nodeify(cb);
+    }
+  }
   if (this._hasMethod('renderAsync')) {
     return tr.normalizeAsync(this._tr.renderAsync(str, options, locals), cb);
   } else if (this._hasMethod('render')) {
     return tr.normalizeAsync(this._tr.render(str, options, locals), cb);
-  } else if (this._hasMethod('compile') || this._hasMethod('compileAsync')) {
+  } else {
     return tr.normalizeAsync(this.compileAsync(str, options).then(function (compiled) {
       return {body: compiled.fn(options || locals), dependencies: compiled.dependencies};
     }), cb);
-  } else {
-    return Promise.reject(new Error('This transform does not support rendering of plain strings'));
   }
 };
 Transformer.prototype.renderFile = function (filename, options, locals) {

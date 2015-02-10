@@ -94,11 +94,6 @@ test('compileFileClient - with tr.compileClient(filename, options) => fn', funct
 });
 
 test('compileFileClientAsync - without tr.compileClient, tr.compileClientAsync, tr.compileFileClient or tr.compileFileClientAsync', function (override) {
-  override('readFile', function (filename, encoding) {
-    assert(filename === 'example-input.txt');
-    assert(encoding === 'utf8');
-    return Promise.resolve('expected text');
-  });
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',

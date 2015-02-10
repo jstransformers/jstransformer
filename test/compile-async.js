@@ -54,9 +54,21 @@ test('compileAsync - without tr.compile or tr.compileAsync', function () {
     render: function (str, options) {
     }
   });
-  return tr.compileAsync('example input', {}).then(function () {
+  var a = tr.compileAsync('example input', {}).then(function () {
     throw new Error('Expected error');
   }, function (err) {
-    if (!(/does not support/.test(err.message))) throw err;
+    if (!(/does not support compilation/.test(err.message))) throw err;
   });
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compileFile: function (filename, options) {
+    }
+  });
+  var b = tr.compileAsync('example input', {}).then(function () {
+    throw new Error('Expected error');
+  }, function (err) {
+    if (!(/does not support compiling plain strings/.test(err.message))) throw err;
+  });
+  return Promise.all([a, b]);
 });

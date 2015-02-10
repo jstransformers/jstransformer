@@ -54,10 +54,19 @@ test('compileFileClient - without tr.compileClient or tr.compileFileClient', fun
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
+    compileClientAsync: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.compileFileClient('example-input.txt', {});
+  }, /does not support compiling for the client synchronously/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
     render: function () {
     }
   });
   assert.throws(function () {
     tr.compileFileClient('example-input.txt', {});
-  }, /does not support/);
+  }, /does not support compiling for the client/);
 });

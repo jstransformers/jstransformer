@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
@@ -46,18 +47,32 @@ test('compileClientAsync - with tr.compileClient(src, options) => fn', function 
   });
   assert(tr.compileClientAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compile - without tr.compileClient', function () {
+test('compileClientAsync - without tr.compileClient', function () {
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compileFileClientAsync : function () {
+    }
+  });
+  var a = tr.compileClientAsync('example input', {}).then(function () {
+    throw new Error('expected to have an error');
+  }, function (err) {
+    if (!/does not support compiling for the client from a string/.test(err.message)) {
+      throw err;
+    }
+  });
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
     compileFile: function () {
     }
   });
-  return tr.compileClientAsync('example input', {}).then(function () {
+  var b = tr.compileClientAsync('example input', {}).then(function () {
     throw new Error('expected to have an error');
   }, function (err) {
-    if (!/does not support/.test(err.message)) {
+    if (!/does not support compiling for the client/.test(err.message)) {
       throw err;
     }
   });
+  return Promise.all([a, b]);
 });

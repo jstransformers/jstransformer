@@ -32,5 +32,23 @@ test('compile - without tr.compile', function () {
   });
   assert.throws(function () {
     tr.compile('example input', {});
-  }, /does not support/);
+  }, /does not support compiling plain strings/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compileAsync: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.compile('example input', {});
+  }, /does not support synchronous compilation/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    render: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.compile('example input', {});
+  }, /does not support compilation/);
 });

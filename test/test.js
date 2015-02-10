@@ -34,7 +34,6 @@ function test(name, fn) {
         });
         throw err;
       });
-      throw new Error('Asynchronous tests cannot use mocks');
     } else {
       Object.keys(originals).forEach(function (key) {
         tr[key] = originals[key];

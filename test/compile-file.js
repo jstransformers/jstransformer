@@ -50,10 +50,19 @@ test('compileFile - without tr.compile or tr.compileFile', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
+    compileAsync: function () {
+    }
+  });
+  assert.throws(function () {
+    tr.compileFile('example input', {});
+  }, /does not support synchronous compilation/);
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
     render: function () {
     }
   });
   assert.throws(function () {
     tr.compileFile('example input', {});
-  }, /does not support/);
+  }, /does not support compilation/);
 });
