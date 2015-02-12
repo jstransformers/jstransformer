@@ -27,74 +27,67 @@ This gives the same API regardless of the jstransformer passed in.
 
 A transformer, once normalised using this module, will implement the following methods.  Note that if the underlying transformer cannot be used to implement the functionality, it may ultimately just throw an error.
 
-### `.render`
+### Returned object from `.render*`
 
 ```js
-transformer.render(str, options);
-=> {body: String, dependencies: Array.<String>}
+{body: String, dependencies: Array.<String>}
 ```
-
-_requires the underlying transform to implement `.render`_
-
-Transform a string and return an object where:
 
  - `body` represents the result as a string
  - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
 
+### `.render`
+
+```js
+transformer.render(str, options, locals);
+=> {body: String, dependencies: Array.<String>}
+```
+
+_requires the underlying transform to implement `.render` or `.compile`_
+
+Transform a string and return an object.
+
 ### `.renderAsync`
 
 ```js
-transformer.renderAsync(str, options, callback);
+transformer.renderAsync(str[, options], locals, callback);
 ```
 
 ```js
-transformer.renderAsync(str, options);
+transformer.renderAsync(str[, options], locals);
 => Promise({body: String, dependencies: Array.<String>})
 ```
 
 _requires the underlying transform to implement `.renderAsync` or `.render`_
 
-Transform a string asynchronously and return an object where:
-
- - `body` represents the result as a string
- - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
-
-If a callback is provided, it is called with the error followed by the result, otherwise a Promise is returned.
+Transform a string asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
 ### `.renderFile`
 
 ```js
-transformer.renderFile(filename, options)
+transformer.renderFile(filename, options, locals)
 => {body: String, dependencies: Array.<String>}
 ```
 
-_requires the underlying transform to implement `.renderFile` or `.render`_
+_requires the underlying transform to implement `.renderFile`, `.render`, `compileFile`, or `compile`_
 
-Transform a file and return an object where:
-
- - `body` represents the result as a string
- - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies).  This does not include the initial file being rendered.
+Transform a file and return an object.
 
 ### `.renderFileAsync`
 
 ```js
-transformer.renderFileAsync(filename, options, callback);
+transformer.renderFileAsync(filename[, options], locals, callback);
 ```
 
 ```js
-transformer.renderFileAsync(filename, options);
+transformer.renderFileAsync(filename[, options], locals);
 => Promise({body: String, dependencies: Array.<String>})
 ```
 
-_requires the underlying transform to implement `.renderFileAsync`, `.renderFile`, `.renderAsync` or `.render`_
+_requires the underlying transform to implement `.renderFileAsync`, `.renderFile`, `.renderAsync`, `.render`, `compileFileAsync`, `compileFile`, `compileAsync`, or `compileFile`_
 
-Transform a file and return an object where:
-
- - `body` represents the result as a string
- - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies).  This does not include the initial file being rendered.
-
-If a callback is provided, it is called with the error followed by the result, otherwise a Promise is returned.
+Transform a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
 ## License
 
-  MIT
+MIT
