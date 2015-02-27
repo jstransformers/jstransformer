@@ -4,6 +4,7 @@ Normalize the API of any jstransformer
 
 [![Build Status](https://img.shields.io/travis/jstransformers/jstransformer/master.svg)](https://travis-ci.org/jstransformers/jstransformer)
 [![Dependency Status](https://img.shields.io/gemnasium/jstransformers/jstransformer.svg)](https://gemnasium.com/jstransformers/jstransformer)
+[![Coverage Status](https://img.shields.io/coveralls/jstransformers/jstransformer/master.svg)](https://coveralls.io/r/jstransformers/jstransformer?branch=master)
 [![NPM version](https://img.shields.io/npm/v/jstransformer.svg)](https://www.npmjs.org/package/jstransformer)
 
 ## Installation
