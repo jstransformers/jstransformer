@@ -325,3 +325,10 @@ Transformer.prototype.renderFileAsync = function (filename, options, locals, cb)
     }.bind(this)), cb);
   }
 };
+
+/**
+ * inputFormats
+ */
+Transformer.prototype.inputFormats = function() {
+  return this._tr.inputFormats || [this._tr.name];
+};
