@@ -4,6 +4,6 @@ sudo: false
 node_js:
   - "0.10"
   - "0.12"
-  - "1.2"
+  - "iojs"
 
 after_success: npm run coveralls
