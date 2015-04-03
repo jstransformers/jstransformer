@@ -6,14 +6,12 @@
     "jstransformer"
   ],
   "devDependencies": {
-    "coveralls": "^2.11.2",
     "istanbul": "^0.3.5",
     "testit": "^2.0.2"
   },
   "scripts": {
     "test": "node test",
-    "coverage": "istanbul cover test",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
+    "coverage": "istanbul cover test"
   },
   "repository": {
     "type": "git",
