@@ -1,0 +1,24 @@
+{
+  "name": "jstransformer-foo",
+  "version": "0.0.0",
+  "description": "A transformer that transforms a string into foo.",
+  "keywords": [
+    "jstransformer"
+  ],
+  "devDependencies": {
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.5",
+    "testit": "^2.0.2"
+  },
+  "scripts": {
+    "test": "node test",
+    "coverage": "istanbul cover test",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jstransformers/jstransformer-foo.git"
+  },
+  "author": "Your Name <email@example.com>",
+  "license": "MIT"
+}
