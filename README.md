@@ -89,6 +89,15 @@ _requires the underlying transform to implement `.renderFileAsync`, `.renderFile
 
 Transform a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
+### `.inputFormats`
+
+```js
+var formats = transformer.inputFormats;
+=> ['md', 'markdown']
+```
+
+Returns an array of strings representing potential input formats for the transform. If not provided directly by the transform, results in an array containing the name of the transform.
+
 ## License
 
 MIT

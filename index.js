@@ -94,6 +94,7 @@ function Transformer(tr) {
   this._tr = tr;
   this.name = this._tr.name;
   this.outputFormat = this._tr.outputFormat;
+  this.inputFormats = this._tr.inputFormats || [this.name];
 }
 
 var fallbacks = {
