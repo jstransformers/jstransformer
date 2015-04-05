@@ -94,6 +94,7 @@ function Transformer(tr) {
   this._tr = tr;
   this.name = this._tr.name;
   this.outputFormat = this._tr.outputFormat;
+  this.inputFormats = this._tr.inputFormats || [this.name];
 }
 
 var fallbacks = {
@@ -324,11 +325,4 @@ Transformer.prototype.renderFileAsync = function (filename, options, locals, cb)
       return this.renderAsync(str, options, locals);
     }.bind(this)), cb);
   }
-};
-
-/**
- * inputFormats
- */
-Transformer.prototype.inputFormats = function() {
-  return this._tr.inputFormats || [this._tr.name];
 };

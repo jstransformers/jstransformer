@@ -16,7 +16,7 @@ test('inputFormats - with tr.inputFormats', function (override) {
       return str;
     }
   });
-  assert.deepEqual(tr.inputFormats(), ['html', 'htm']);
+  assert.deepEqual(tr.inputFormats, ['html', 'htm']);
 });
 
 test('inputFormats - without tr.inputFormats', function (override) {
@@ -27,5 +27,5 @@ test('inputFormats - without tr.inputFormats', function (override) {
       return str;
     }
   });
-  assert.deepEqual(tr.inputFormats(), ['test']);
+  assert.deepEqual(tr.inputFormats, ['test']);
 });

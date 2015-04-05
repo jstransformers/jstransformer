@@ -92,7 +92,7 @@ Transform a file asynchronously. If a callback is provided, it is called as `cal
 ### `.inputFormats`
 
 ```js
-var formats = transformer.inputFormats();
+var formats = transformer.inputFormats;
 => ['md', 'markdown']
 ```
 

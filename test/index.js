@@ -38,4 +38,4 @@ require('./compile-file-client');
 require('./compile-file-client-async');
 require('./render');
 require('./render-async');
-require('./input-format');
+require('./input-formats');
