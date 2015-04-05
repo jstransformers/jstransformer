@@ -1,6 +1,6 @@
 # jstransformer
 
-<img src="logo.png" align="right" width="299px" height="300px" />
+<img src="logo.png" align="right" width="300px" height="299px" />
 
 Normalize the API of any jstransformer
 
