@@ -1,5 +1,7 @@
 # jstransformer
 
+<img src="logo.png" align="right" width="299px" height="300px" />
+
 Normalize the API of any jstransformer
 
 [![Build Status](https://img.shields.io/travis/jstransformers/jstransformer/master.svg)](https://travis-ci.org/jstransformers/jstransformer)
