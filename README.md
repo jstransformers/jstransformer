@@ -1,8 +1,6 @@
-# jstransformer
-
-<img src="logo.png" align="right" width="300px" height="299px" />
-
-Normalize the API of any jstransformer
+<p align="center"><img src="logo.png" width="300px" height="299px" /></p>
+<h1 align="center">JSTransformer</h1>
+<p align="center">Normalize the API of any jstransformer</p>
 
 [![Build Status](https://img.shields.io/travis/jstransformers/jstransformer/master.svg)](https://travis-ci.org/jstransformers/jstransformer)
 [![Dependency Status](https://img.shields.io/gemnasium/jstransformers/jstransformer.svg)](https://gemnasium.com/jstransformers/jstransformer)
