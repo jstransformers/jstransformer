@@ -5,6 +5,10 @@
   "keywords": [
     "jstransformer"
   ],
+  "files": [
+    "index.js",
+    "LICENSE.md"
+  ],
   "devDependencies": {
     "istanbul": "^0.3.5",
     "testit": "^2.0.2"
