@@ -1,4 +1,4 @@
-<p align="center"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/master/logo.svg" width="300px" height="299px" /></p>
+<p align="center"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/2bb6dc6c410e8683a17a4af5f1b73bcbee95aada/logo.svg" width="300px" height="299px" /></p>
 <h1 align="center">JSTransformer</h1>
 <p align="center">Normalize the API of any jstransformer</p>
 
