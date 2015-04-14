@@ -109,6 +109,23 @@ test('renderAsync - with tr.compile(src, options) => fn', function (override) {
   };
   assert(tr.renderAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
+test('renderAsync(src, options, locals) - with tr.compile(src, options) => fn', function (override) {
+  var nameSentinel = 'jstransformer';
+  override('normalizeAsync', function (result) {
+    return result;
+  });
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compile: function (str, options) {
+      return function (locals) { return String(locals.name); };
+    }
+  });
+  tr.renderAsync('example input', { blah: true }, { name: nameSentinel })
+    .then(function (res) {
+      assert.equal( res.body, nameSentinel)
+    })
+});
 test('renderAsync - without tr.render', function () {
   var tr = createTransformer({
     name: 'test',

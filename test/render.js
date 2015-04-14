@@ -56,6 +56,20 @@ test('render - with tr.compile(src, options) => fn', function (override) {
   });
   assert(tr.render('example input', sentinel) === normalizedSentinel);
 });
+test('render(src, options, locals) - with tr.compile(src, options) => fn', function (override) {
+  var nameSentinel = 'jstransformer';
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    compile: function (str, options) {
+      return function (locals) { return String(locals.name); };
+    }
+  });
+  assert.equal( tr.render( 'example input'
+                        , { blah: true }
+                        , { name: nameSentinel }).body
+              , nameSentinel);
+});
 test('render - without tr.render', function () {
   var tr = createTransformer({
     name: 'test',
