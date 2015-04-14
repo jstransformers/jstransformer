@@ -265,7 +265,7 @@ Transformer.prototype.render = function (str, options, locals) {
     return tr.normalize(this._tr.render(str, options, locals));
   } else {
     var compiled = tr.normalizeFn(this._tr.compile(str, options));
-    var body = compiled.fn(options || locals);
+    var body = compiled.fn(locals || options);
     if (typeof body !== 'string') {
       throw new Error('The Transform "' + this.name + '" does not support rendering synchronously.');
     }
@@ -290,7 +290,7 @@ Transformer.prototype.renderAsync = function (str, options, locals, cb) {
     return tr.normalizeAsync(this._tr.render(str, options, locals), cb);
   } else {
     return tr.normalizeAsync(this.compileAsync(str, options).then(function (compiled) {
-      return {body: compiled.fn(options || locals), dependencies: compiled.dependencies};
+      return {body: compiled.fn(locals || options), dependencies: compiled.dependencies};
     }), cb);
   }
 };
@@ -301,7 +301,7 @@ Transformer.prototype.renderFile = function (filename, options, locals) {
     return tr.normalize(this._tr.render(tr.readFileSync(filename, 'utf8'), options, locals));
   } else if (this._hasMethod('compile') || this._hasMethod('compileFile')) {
     var compiled = this.compileFile(filename, options);
-    return tr.normalize({body: compiled.fn(options || locals), dependencies: compiled.dependencies});
+    return tr.normalize({body: compiled.fn(locals || options), dependencies: compiled.dependencies});
   } else {
     return Promise.reject(new Error('This transform does not support synchronous rendering'));
   }
@@ -318,7 +318,7 @@ Transformer.prototype.renderFileAsync = function (filename, options, locals, cb)
   } else if (this._hasMethod('compile') || this._hasMethod('compileAsync')
              || this._hasMethod('compileFile') || this._hasMethod('compileFileAsync')) {
     return tr.normalizeAsync(this.compileFileAsync(filename, options).then(function (compiled) {
-      return {body: compiled.fn(options || locals), dependencies: compiled.dependencies};
+      return {body: compiled.fn(locals || options), dependencies: compiled.dependencies};
     }), cb);
   } else {
     return tr.normalizeAsync(tr.readFile(filename, 'utf8').then(function (str) {
