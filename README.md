@@ -1,11 +1,12 @@
-<p align="center"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/2bb6dc6c410e8683a17a4af5f1b73bcbee95aada/logo.svg" width="300px" height="299px" /></p>
-<h1 align="center">JSTransformer</h1>
-<p align="center">Normalize the API of any jstransformer</p>
+<a href="https://promisesaplus.com/"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/2bb6dc6c410e8683a17a4af5f1b73bcbee95aada/logo.svg" align="right" width="75px" height="75px" /></a>
+# JSTransformer
 
-<p align="center"><a href="https://travis-ci.org/jstransformers/jstransformer"><img src="https://img.shields.io/travis/jstransformers/jstransformer/master.svg" alt="Build Status"></a>
-<a href="https://gemnasium.com/jstransformers/jstransformer"><img src="https://img.shields.io/gemnasium/jstransformers/jstransformer.svg" alt="Dependency Status"></a>
-<a href="https://coveralls.io/r/jstransformers/jstransformer?branch=master"><img src="https://img.shields.io/coveralls/jstransformers/jstransformer/master.svg" alt="Coverage Status"></a>
-<a href="https://www.npmjs.org/package/jstransformer"><img src="https://img.shields.io/npm/v/jstransformer.svg" alt="NPM version"></a></p>
+Normalize the API of any JSTransformer.
+
+[![Build Status](https://img.shields.io/travis/jstransformers/jstransformer/master.svg)](https://travis-ci.org/jstransformers/jstransformer-foo)
+[![Dependency Status](https://img.shields.io/gemnasium/jstransformers/jstransformer.svg)](https://gemnasium.com/jstransformers/jstransformer)
+[![Coverage Status](https://img.shields.io/coveralls/jstransformers/jstransformer/master.svg)](https://coveralls.io/r/jstransformers/jstransformer?branch=master)
+[![NPM version](https://img.shields.io/npm/v/jstransformer.svg)](https://www.npmjs.org/package/jstransformer)
 
 ## Installation
 
