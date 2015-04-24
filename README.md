@@ -1,4 +1,4 @@
-<a href="https://promisesaplus.com/"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/2bb6dc6c410e8683a17a4af5f1b73bcbee95aada/logo.svg" align="right" width="75px" height="75px" /></a>
+<a href="http://github.com/jstransformers/jstransformer"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/2bb6dc6c410e8683a17a4af5f1b73bcbee95aada/logo.svg" align="right" width="75px" height="75px" /></a>
 
 # JSTransformer
 
