@@ -8,8 +8,9 @@ var test = require('testit');
 var transform = require('../');
 
 var input = fs.readFileSync(join(__dirname, 'input.txt')).toString();
+var options = require('./options');
+var locals = require('./locals');
 var expected = fs.readFileSync(join(__dirname, 'expected.txt')).toString();
-var output;
 
 function assertEqual(output, expected) {
   console.log('   Output:\t'   + JSON.stringify(output));
@@ -17,7 +18,16 @@ function assertEqual(output, expected) {
   assert.equal(output, expected);
 }
 
-test('a', function () {
-  output = transform.render(input);
-  assertEqual(output, expected);
+test(transform.name + '.render()', function () {
+  if (transform.render) {
+    var output = transform.render(input, options, locals);
+    assertEqual(output, expected);
+  }
+});
+
+test(transform.name + '.compile()', function () {
+  if (transform.compile) {
+    var output = transform.compile(input, options)(locals);
+    assertEqual(output, expected);
+  }
 });

@@ -1,7 +1,7 @@
 {
   "name": "jstransformer-foo",
   "version": "0.0.0",
-  "description": "A transformer that transforms a string into foo.",
+  "description": "Foo support for JSTransformers.",
   "keywords": [
     "jstransformer"
   ],
@@ -9,7 +9,7 @@
     "index.js"
   ],
   "devDependencies": {
-    "istanbul": "^0.3.5",
+    "istanbul": "^0.3.14",
     "testit": "^2.0.2"
   },
   "scripts": {
