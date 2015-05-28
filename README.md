@@ -15,6 +15,7 @@ Transformer that converts a string to foo.
 
 [![Build Status](https://img.shields.io/travis/jstransformers/jstransformer-foo/master.svg)](https://travis-ci.org/jstransformers/jstransformer-foo)
 [![Coverage Status](https://img.shields.io/coveralls/jstransformers/jstransformer-foo/master.svg)](https://coveralls.io/r/jstransformers/jstransformer-foo?branch=master)
+[![Dependency Status](https://img.shields.io/gemnasium/jstransformers/jstransformer-foo.svg)](https://gemnasium.com/jstransformers/jstransformer-foo)
 [![NPM version](https://img.shields.io/npm/v/jstransformer-foo.svg)](https://www.npmjs.org/package/jstransformer-foo)
 
 ## Installation
