@@ -33,6 +33,13 @@ if (transform.compile) {
   });
 }
 
+if (transform.compileFile) {
+  test(transform.name + '.compileFile()', function () {
+    var output = transform.compileFile(inputFile, options)(locals);
+    assertEqual(output, expected);
+  });
+}
+
 if (transform.renderAsync) {
   test(transform.name + '.renderAsync()', function (done) {
     transform.renderAsync(input, options, locals).then(function (output) {
