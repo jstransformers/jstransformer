@@ -16,27 +16,27 @@ var expected = fs.readFileSync(join(__dirname, 'expected.txt')).toString().trim(
 function assertEqual(output, expected) {
   console.log('   Output:\t'   + JSON.stringify(output));
   console.log('   Expected:\t' + JSON.stringify(expected));
-  assert.equal(output.trim(), expected);
+  assert.equal(output, expected);
 }
 
 if (transform.render) {
   test(transform.name + '.render()', function () {
     var output = transform.render(input, options, locals);
-    assertEqual(output, expected);
+    assertEqual(output.trim(), expected);
   });
 }
 
 if (transform.compile) {
   test(transform.name + '.compile()', function () {
     var output = transform.compile(input, options)(locals);
-    assertEqual(output, expected);
+    assertEqual(output.trim(), expected);
   });
 }
 
 if (transform.renderAsync) {
   test(transform.name + '.renderAsync()', function (done) {
     transform.renderAsync(input, options, locals).then(function (output) {
-      assertEqual(output, expected);
+      assertEqual(output.trim(), expected);
       done();
     }, function (err) {
       done(err);
@@ -47,7 +47,7 @@ if (transform.renderAsync) {
 if (transform.renderFileAsync) {
   test(transform.name + '.renderFileAsync()', function (done) {
     transform.renderFileAsync(inputFile, options, locals).then(function (output) {
-      assertEqual(output, expected);
+      assertEqual(output.trim(), expected);
       done();
     }, function (err) {
       done(err);
