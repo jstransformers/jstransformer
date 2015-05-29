@@ -61,3 +61,14 @@ if (transform.renderFileAsync) {
     }).done();
   });
 }
+
+if (transform.compileFileAsync) {
+  test(transform.name + '.compileFileAsync()', function (done) {
+    transform.compileFileAsync(inputFile, options).then(function (template) {
+      assertEqual(template(locals), expected);
+      done();
+    }, function (err) {
+      done(err);
+    }).done();
+  });
+}
