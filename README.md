@@ -1,13 +1,9 @@
-# boilerplates
+# JSTransformer Boilerplate
 
-This is a boilerplate for new transformers.
+Use JSTransformer Boilerplate to create and update transformers.
 
-What you need to do:
-
-1. Add your name to `LICENSE.md` and `package.json`
-2. Activate Travis CI and Coveralls.
-3. Update module name in `package.json` and `README.md`
-4. Let the fun begin!
+1. Visit [the Boilerplate Wiki](https://github.com/jstransformers/boilerplate/wiki) on how to get started
+2. Remove this top notice from any transformers
 
 # jstransformer-foo
 
