@@ -45,10 +45,22 @@ test('compile - without tr.compile', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
-    render: function () {
+    compileClient: function () {
     }
   });
   assert.throws(function () {
     tr.compile('example input', {});
   }, /does not support compilation/);
+});
+
+test('compile - without tr.compile, but with tr.render => fn', function (override) {
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    render: function (str, options, locals) {
+      assert(str === 'example input');
+      return locals.name;
+    }
+  });
+  assert(tr.compile('example input', {}).fn({name: 'hola'}) === 'hola');
 });
