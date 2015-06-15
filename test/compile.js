@@ -53,7 +53,7 @@ test('compile - without tr.compile', function () {
   }, /does not support compilation/);
 });
 
-test('compile - without tr.compile, but with tr.render => fn', function (override) {
+test('compile - without tr.compile, but with tr.render => fn', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -62,5 +62,5 @@ test('compile - without tr.compile, but with tr.render => fn', function (overrid
       return locals.name;
     }
   });
-  assert(tr.compile('example input', {}).fn({name: 'hola'}) === 'hola');
+  assert.equal(tr.compile('example input').fn({name: 'hola'}).body, 'hola');
 });

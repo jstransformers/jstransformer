@@ -133,7 +133,7 @@ Transformer.prototype.compile = function (str, options) {
     if (this.can('render')) {
       var _this = this;
       return tr.normalizeFn(function (locals) {
-        return _this._tr.render(str, options, locals);
+        return tr.normalize(_this._tr.render(str, options, locals));
       });
     }
     if (this.can('compileAsync')) {
