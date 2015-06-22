@@ -19,6 +19,9 @@
     "type": "git",
     "url": "https://github.com/jstransformers/jstransformer-foo.git"
   },
-  "author": "Your Name <email@example.com>",
+  "author": {
+    "name": "JSTransformers Team",
+    "url": "http://github.com/orgs/jstransformers/people"
+  },
   "license": "MIT"
 }
