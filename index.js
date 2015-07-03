@@ -98,7 +98,7 @@ function Transformer(tr) {
 }
 
 var fallbacks = {
-  compile: ['compile'],
+  compile: ['compile', 'render'],
   compileAsync: ['compileAsync', 'compile'],
   compileFile: ['compileFile', 'compile'],
   compileFileAsync: ['compileFileAsync', 'compileFile', 'compileAsync', 'compile'],
@@ -129,7 +129,7 @@ Transformer.prototype.can = function (method) {
 /* COMPILE */
 
 Transformer.prototype.compile = function (str, options) {
-  if (!this.can('compile')) {
+  if (!this._hasMethod('compile')) {
     if (this.can('render')) {
       var _this = this;
       return {
