@@ -101,7 +101,10 @@ var fallbacks = {
   compile: ['compile', 'render'],
   compileAsync: ['compileAsync', 'compile', 'render'],
   compileFile: ['compileFile', 'compile', 'renderFile', 'render'],
-  compileFileAsync: ['compileFileAsync', 'compileFile', 'compileAsync', 'compile'],
+  compileFileAsync: [
+    'compileFileAsync', 'compileFile', 'compileAsync', 'compile',
+    'renderFile', 'render'
+  ],
   compileClient: ['compileClient'],
   compileClientAsync: ['compileClientAsync', 'compileClient'],
   compileFileClient: ['compileFileClient', 'compileClient'],
@@ -179,14 +182,14 @@ Transformer.prototype.compileFileAsync = function (filename, options, cb) {
   }
   if (this._hasMethod('compileFileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileFileAsync(filename, options), cb);
-  } else if (this._hasMethod('compileFile')) {
-    return tr.normalizeFnAsync(this._tr.compileFile(filename, options), cb);
-  } else {
+  } else if (this._hasMethod('compileFile') || this._hasMethod('renderFile')) {
+    return tr.normalizeFnAsync(this.compileFile(filename, options), cb);
+  } else { // compileAsync || compile || render
     return tr.normalizeFnAsync(tr.readFile(filename, 'utf8').then(function (str) {
       if (this._hasMethod('compileAsync')) {
         return this._tr.compileAsync(str, options);
-      } else {
-        return this._tr.compile(str, options);
+      } else { // compile || render
+        return this.compile(str, options);
       }
     }.bind(this)), cb);
   }
