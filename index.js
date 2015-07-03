@@ -132,9 +132,12 @@ Transformer.prototype.compile = function (str, options) {
   if (!this.can('compile')) {
     if (this.can('render')) {
       var _this = this;
-      return tr.normalizeFn(function (locals) {
-        return tr.normalize(_this._tr.render(str, options, locals));
-      });
+      return {
+        fn: function (locals) {
+          return tr.normalize(_this._tr.render(str, options, locals)).body;
+        },
+        dependencies: []
+      };
     }
     if (this.can('compileAsync')) {
       throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');

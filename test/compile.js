@@ -62,5 +62,5 @@ test('compile - without tr.compile, but with tr.render => fn', function () {
       return locals.name;
     }
   });
-  assert.equal(tr.compile('example input').fn({name: 'hola'}).body, 'hola');
+  assert.equal(tr.compile('example input').fn({name: 'hola'}), 'hola');
 });
