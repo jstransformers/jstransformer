@@ -46,7 +46,41 @@ test('compileFile - with tr.compile(src, options) => fn', function (override) {
   });
   assert(tr.compileFile('example-input.txt', sentinel) === normalizedSentinel);
 });
-test('compileFile - without tr.compile or tr.compileFile', function () {
+test('compileFile - with tr.renderFile(src, options, locals) => output', function (override) {
+  var sentinel = {};
+  var localsSentinel = {};
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    renderFile: function (file, options, locals) {
+      assert(file === 'example-input.txt');
+      assert(options === sentinel);
+      assert(locals === localsSentinel);
+      return 'example output';
+    }
+  });
+  assert(tr.compileFile('example-input.txt', sentinel).fn(localsSentinel) === 'example output');
+});
+test('compileFile - with tr.render(src, options, locals) => output', function (override) {
+  var sentinel = {};
+  var localsSentinel = {};
+  override('readFileSync', function (filename) {
+    assert(filename === 'example-input.txt');
+    return 'example input';
+  });
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    render: function (str, options, locals) {
+      assert(str === 'example input');
+      assert(options === sentinel);
+      assert(locals === localsSentinel);
+      return 'example output';
+    }
+  });
+  assert(tr.compileFile('example-input.txt', sentinel).fn(localsSentinel) === 'example output');
+});
+test('compileFile - without tr.compile, tr.compileFile, tr.render, or tr.renderFile', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -56,13 +90,4 @@ test('compileFile - without tr.compile or tr.compileFile', function () {
   assert.throws(function () {
     tr.compileFile('example input', {});
   }, /does not support synchronous compilation/);
-  var tr = createTransformer({
-    name: 'test',
-    outputFormat: 'html',
-    render: function () {
-    }
-  });
-  assert.throws(function () {
-    tr.compileFile('example input', {});
-  }, /does not support compilation/);
 });

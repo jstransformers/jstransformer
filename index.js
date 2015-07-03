@@ -100,7 +100,7 @@ function Transformer(tr) {
 var fallbacks = {
   compile: ['compile', 'render'],
   compileAsync: ['compileAsync', 'compile'],
-  compileFile: ['compileFile', 'compile'],
+  compileFile: ['compileFile', 'compile', 'renderFile', 'render'],
   compileFileAsync: ['compileFileAsync', 'compileFile', 'compileAsync', 'compile'],
   compileClient: ['compileClient'],
   compileClientAsync: ['compileClientAsync', 'compileClient'],
@@ -164,17 +164,17 @@ Transformer.prototype.compileAsync = function (str, options, cb) {
   }
 };
 Transformer.prototype.compileFile = function (filename, options) {
-  if (!this.can('compileFile')) {
-    if (this.can('compileFileAsync')) {
-      throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
-    } else {
-      throw new Error('The Transform "' + this.name + '" does not support compilation');
-    }
+  if (!this.can('compileFile')) { // compile*Client* || compile*Async || render*Async
+    throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
   }
   if (this._hasMethod('compileFile')) {
     return tr.normalizeFn(this._tr.compileFile(filename, options));
-  } else {
-    return tr.normalizeFn(this._tr.compile(tr.readFileSync(filename, 'utf8'), options));
+  } else if (this._hasMethod('renderFile')) {
+    return tr.normalizeFn(function (locals) {
+      return tr.normalize(this._tr.renderFile(filename, options, locals)).body;
+    }.bind(this));
+  } else { // render || compile
+    return this.compile(tr.readFileSync(filename, 'utf8'), options);
   }
 };
 Transformer.prototype.compileFileAsync = function (filename, options, cb) {
