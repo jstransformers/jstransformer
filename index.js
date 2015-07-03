@@ -99,7 +99,7 @@ function Transformer(tr) {
 
 var fallbacks = {
   compile: ['compile', 'render'],
-  compileAsync: ['compileAsync', 'compile'],
+  compileAsync: ['compileAsync', 'compile', 'render'],
   compileFile: ['compileFile', 'compile', 'renderFile', 'render'],
   compileFileAsync: ['compileFileAsync', 'compileFile', 'compileAsync', 'compile'],
   compileClient: ['compileClient'],
@@ -150,17 +150,13 @@ Transformer.prototype.compile = function (str, options) {
   return tr.normalizeFn(this._tr.compile(str, options));
 };
 Transformer.prototype.compileAsync = function (str, options, cb) {
-  if (!this.can('compileAsync')) {
-    if (this.can('compileFileAsync')) {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
-    } else {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compilation')).nodeify(cb);
-    }
+  if (!this.can('compileAsync')) { // compileFile* || renderFile* || renderAsync || compile*Client*
+    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
   }
   if (this._hasMethod('compileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileAsync(str, options), cb);
-  } else {
-    return tr.normalizeFnAsync(this._tr.compile(str, options), cb);
+  } else { // render || compile
+    return tr.normalizeFnAsync(this.compile(str, options), cb);
   }
 };
 Transformer.prototype.compileFile = function (filename, options) {
