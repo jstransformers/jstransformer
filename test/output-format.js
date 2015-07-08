@@ -4,7 +4,9 @@ var assert = require('assert');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('outputFormat - preserves tr.outputFormat', function () {
+test('outputFormat', function () {
+
+test('preserves tr.outputFormat', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'css',
@@ -14,7 +16,7 @@ test('outputFormat - preserves tr.outputFormat', function () {
   });
   assert.equal(tr.outputFormat, 'css');
 });
-test('outputFormat - throws without tr.outputFormat', function () {
+test('throws without tr.outputFormat', function () {
   assert.throws(function () {
     createTransformer({
       name: 'test',
@@ -23,4 +25,6 @@ test('outputFormat - throws without tr.outputFormat', function () {
       }
     });
   }, /Transformer must have an output format/);
+});
+
 });

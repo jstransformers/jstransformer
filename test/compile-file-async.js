@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileFileAsync - with tr.compileFileAsync(src, options) => Promise(fn)', function (override) {
+test('compileFileAsync', function () {
+
+test('with tr.compileFileAsync(src, options) => Promise(fn)', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var cbSentinel = {};
@@ -26,7 +28,7 @@ test('compileFileAsync - with tr.compileFileAsync(src, options) => Promise(fn)',
   });
   assert(tr.compileFileAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compileFileAsync - with tr.compileFile(src, options) => fn', function () {
+test('with tr.compileFile(src, options) => fn', function () {
   var sentinel = {};
   var fnSentinel = function (locals) {};
   var tr = createTransformer({
@@ -42,7 +44,7 @@ test('compileFileAsync - with tr.compileFile(src, options) => fn', function () {
     assert(out.fn === fnSentinel);
   });
 });
-test('compileFileAsync - with tr.compileAsync(src, options) => Promise(fn)', function (override) {
+test('with tr.compileAsync(src, options) => Promise(fn)', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var cbSentinel = {};
@@ -68,7 +70,7 @@ test('compileFileAsync - with tr.compileAsync(src, options) => Promise(fn)', fun
   });
   assert(tr.compileFileAsync('example-input.txt', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compileFileAsync - with tr.compile(src, options) => fn', function (override) {
+test('with tr.compile(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = function (locals) {};
   override('readFile', function (filename, encoding) {
@@ -89,7 +91,7 @@ test('compileFileAsync - with tr.compile(src, options) => fn', function (overrid
     assert(out.fn === fnSentinel);
   });
 });
-test('compileFileAsync - with tr.renderFile(file, options, locals) => output', function () {
+test('with tr.renderFile(file, options, locals) => output', function () {
   var sentinel = {};
   var localsSentinel = {};
   var tr = createTransformer({
@@ -106,7 +108,7 @@ test('compileFileAsync - with tr.renderFile(file, options, locals) => output', f
     assert(out.fn(localsSentinel) === 'example output');
   });
 });
-test('compileFileAsync - with tr.render(src, options, locals) => output', function (override) {
+test('with tr.render(src, options, locals) => output', function (override) {
   var sentinel = {};
   var localsSentinel = {};
   override('readFile', function (filename, encoding) {
@@ -128,7 +130,7 @@ test('compileFileAsync - with tr.render(src, options, locals) => output', functi
     assert(out.fn(localsSentinel) === 'example output');
   });
 });
-test('compileFileAsync - without tr.compile, tr.compileAsync, tr.compileFile, tr.compileFileAsync, tr.render or tr.renderFile', function (override) {
+test('without any of the above', function (override) {
   override('readFile', function (filename) {
     assert(filename === 'example-input.txt');
     return Promise.resolve('example input');
@@ -144,4 +146,6 @@ test('compileFileAsync - without tr.compile, tr.compileAsync, tr.compileFile, tr
   }, function (err) {
     if (!(/does not support/.test(err.message))) throw err;
   });
+});
+
 });

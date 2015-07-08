@@ -4,7 +4,9 @@ var assert = require('assert');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileClient - with tr.compileClient(src, options) => str', function (override) {
+test('compileClient', function () {
+
+test('with tr.compileClient(src, options) => str', function (override) {
   var sentinel = {};
   var localSentinel = {};
   var fnSentinel = {};
@@ -24,7 +26,7 @@ test('compileClient - with tr.compileClient(src, options) => str', function (ove
   });
   assert(tr.compileClient('example input', sentinel) === normalizedSentinel);
 });
-test('compileClient - without tr.compileClient', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -52,4 +54,6 @@ test('compileClient - without tr.compileClient', function () {
   assert.throws(function () {
     tr.compileClient('example input', {});
   }, /does not support compiling for the client/);
+});
+
 });

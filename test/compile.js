@@ -4,7 +4,9 @@ var assert = require('assert');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compile - with tr.compile(src, options) => fn', function (override) {
+test('compile', function () {
+
+test('with tr.compile(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -23,7 +25,19 @@ test('compile - with tr.compile(src, options) => fn', function (override) {
   });
   assert(tr.compile('example input', sentinel) === normalizedSentinel);
 });
-test('compile - without tr.compile', function () {
+
+test('with tr.render(src, options, locals) => output', function () {
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    render: function (str, options, locals) {
+      assert(str === 'example input');
+      return locals.name;
+    }
+  });
+  assert.equal(tr.compile('example input').fn({name: 'hola'}), 'hola');
+});
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -53,14 +67,4 @@ test('compile - without tr.compile', function () {
   }, /does not support compilation/);
 });
 
-test('compile - without tr.compile, but with tr.render => fn', function () {
-  var tr = createTransformer({
-    name: 'test',
-    outputFormat: 'html',
-    render: function (str, options, locals) {
-      assert(str === 'example input');
-      return locals.name;
-    }
-  });
-  assert.equal(tr.compile('example input').fn({name: 'hola'}), 'hola');
 });

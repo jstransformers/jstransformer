@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileFileClient - with tr.compileFileClient(filename, options) => fn', function (override) {
+test('compileFileClient', function () {
+
+test('with tr.compileFileClient(filename, options) => fn', function (override) {
   var optionsSentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -25,7 +27,7 @@ test('compileFileClient - with tr.compileFileClient(filename, options) => fn', f
   assert(tr.compileFileClient('example-input.txt', optionsSentinel) === normalizedSentinel);
 });
 
-test('compileFileClient - with tr.compileClient(filename, options) => fn', function (override) {
+test('with tr.compileClient(filename, options) => fn', function (override) {
   var optionsSentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -50,7 +52,7 @@ test('compileFileClient - with tr.compileClient(filename, options) => fn', funct
   assert(tr.compileFileClient('example-input.txt', optionsSentinel) === normalizedSentinel);
 });
 
-test('compileFileClient - without tr.compileClient or tr.compileFileClient', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -69,4 +71,6 @@ test('compileFileClient - without tr.compileClient or tr.compileFileClient', fun
   assert.throws(function () {
     tr.compileFileClient('example-input.txt', {});
   }, /does not support compiling for the client/);
+});
+
 });

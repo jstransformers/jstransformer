@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('render - with tr.render(src, options) => str', function (override) {
+test('render', function () {
+
+test('with tr.render(src, options) => str', function (override) {
   var sentinel = {};
   var localSentinel = {};
   var fnSentinel = {};
@@ -25,7 +27,7 @@ test('render - with tr.render(src, options) => str', function (override) {
   });
   assert(tr.render('example input', sentinel) === normalizedSentinel);
 });
-test('render - with tr.compile(src, options) => fn', function (override) {
+test('with tr.compile(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -70,7 +72,7 @@ test('render(src, options, locals) - with tr.compile(src, options) => fn', funct
                         , { name: nameSentinel }).body
               , nameSentinel);
 });
-test('render - without tr.render', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -113,4 +115,6 @@ test('render - without tr.render', function () {
   assert.throws(function () {
     tr.render('example input', {});
   }, /does not support rendering synchronously/);
+});
+
 });
