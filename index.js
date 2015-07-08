@@ -98,10 +98,13 @@ function Transformer(tr) {
 }
 
 var fallbacks = {
-  compile: ['compile'],
-  compileAsync: ['compileAsync', 'compile'],
-  compileFile: ['compileFile', 'compile'],
-  compileFileAsync: ['compileFileAsync', 'compileFile', 'compileAsync', 'compile'],
+  compile: ['compile', 'render'],
+  compileAsync: ['compileAsync', 'compile', 'render'],
+  compileFile: ['compileFile', 'compile', 'renderFile', 'render'],
+  compileFileAsync: [
+    'compileFileAsync', 'compileFile', 'compileAsync', 'compile',
+    'renderFile', 'render'
+  ],
   compileClient: ['compileClient'],
   compileClientAsync: ['compileClientAsync', 'compileClient'],
   compileFileClient: ['compileFileClient', 'compileClient'],
@@ -129,7 +132,16 @@ Transformer.prototype.can = function (method) {
 /* COMPILE */
 
 Transformer.prototype.compile = function (str, options) {
-  if (!this.can('compile')) {
+  if (!this._hasMethod('compile')) {
+    if (this.can('render')) {
+      var _this = this;
+      return {
+        fn: function (locals) {
+          return tr.normalize(_this._tr.render(str, options, locals)).body;
+        },
+        dependencies: []
+      };
+    }
     if (this.can('compileAsync')) {
       throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
     } else if (this.can('compileFileAsync')) {
@@ -141,31 +153,27 @@ Transformer.prototype.compile = function (str, options) {
   return tr.normalizeFn(this._tr.compile(str, options));
 };
 Transformer.prototype.compileAsync = function (str, options, cb) {
-  if (!this.can('compileAsync')) {
-    if (this.can('compileFileAsync')) {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
-    } else {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compilation')).nodeify(cb);
-    }
+  if (!this.can('compileAsync')) { // compileFile* || renderFile* || renderAsync || compile*Client*
+    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
   }
   if (this._hasMethod('compileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileAsync(str, options), cb);
-  } else {
-    return tr.normalizeFnAsync(this._tr.compile(str, options), cb);
+  } else { // render || compile
+    return tr.normalizeFnAsync(this.compile(str, options), cb);
   }
 };
 Transformer.prototype.compileFile = function (filename, options) {
-  if (!this.can('compileFile')) {
-    if (this.can('compileFileAsync')) {
-      throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
-    } else {
-      throw new Error('The Transform "' + this.name + '" does not support compilation');
-    }
+  if (!this.can('compileFile')) { // compile*Client* || compile*Async || render*Async
+    throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
   }
   if (this._hasMethod('compileFile')) {
     return tr.normalizeFn(this._tr.compileFile(filename, options));
-  } else {
-    return tr.normalizeFn(this._tr.compile(tr.readFileSync(filename, 'utf8'), options));
+  } else if (this._hasMethod('renderFile')) {
+    return tr.normalizeFn(function (locals) {
+      return tr.normalize(this._tr.renderFile(filename, options, locals)).body;
+    }.bind(this));
+  } else { // render || compile
+    return this.compile(tr.readFileSync(filename, 'utf8'), options);
   }
 };
 Transformer.prototype.compileFileAsync = function (filename, options, cb) {
@@ -174,14 +182,14 @@ Transformer.prototype.compileFileAsync = function (filename, options, cb) {
   }
   if (this._hasMethod('compileFileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileFileAsync(filename, options), cb);
-  } else if (this._hasMethod('compileFile')) {
-    return tr.normalizeFnAsync(this._tr.compileFile(filename, options), cb);
-  } else {
+  } else if (this._hasMethod('compileFile') || this._hasMethod('renderFile')) {
+    return tr.normalizeFnAsync(this.compileFile(filename, options), cb);
+  } else { // compileAsync || compile || render
     return tr.normalizeFnAsync(tr.readFile(filename, 'utf8').then(function (str) {
       if (this._hasMethod('compileAsync')) {
         return this._tr.compileAsync(str, options);
-      } else {
-        return this._tr.compile(str, options);
+      } else { // compile || render
+        return this.compile(str, options);
       }
     }.bind(this)), cb);
   }

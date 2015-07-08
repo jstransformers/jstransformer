@@ -26,49 +26,49 @@ test('compileAsync - with tr.compileAsync(str, options) => Promise(fn)', functio
   });
   assert(tr.compileAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compileAsync - with tr.compile(str, options) => fn', function (override) {
+test('compileAsync - with tr.compile(str, options) => fn', function () {
   var sentinel = {};
-  var fnSentinel = {};
-  var cbSentinel = {};
-  var normalizedSentinel = {};
-  override('normalizeFnAsync', function (fn, cb) {
-    assert(fn === fnSentinel);
-    assert(cb === cbSentinel);
-    return normalizedSentinel;
-  });
+  var fnSentinel = function (locals) {};
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
     compile: function (str, options) {
       assert(str === 'example input');
       assert(options === sentinel);
-      return fnSentinel
+      return fnSentinel;
     }
   });
-  assert(tr.compileAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
+  return tr.compileAsync('example input', sentinel).then(function (out) {
+    assert(out.fn === fnSentinel);
+  });
 });
-test('compileAsync - without tr.compile or tr.compileAsync', function () {
+test('compileAsync - with tr.render(str, options, locals) => output', function () {
+  var sentinel = {};
+  var localsSentinel = {};
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
-    render: function (str, options) {
+    render: function (str, options, locals) {
+      assert(str === 'example input');
+      assert(options === sentinel);
+      assert(locals === localsSentinel);
+      return 'example output';
     }
   });
-  var a = tr.compileAsync('example input', {}).then(function () {
-    throw new Error('Expected error');
-  }, function (err) {
-    if (!(/does not support compilation/.test(err.message))) throw err;
+  return tr.compileAsync('example input', sentinel).then(function (out) {
+    assert(out.fn(localsSentinel) === 'example output');
   });
+});
+test('compileAsync - without tr.compile, tr.compileAsync, or tr.render', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
     compileFile: function (filename, options) {
     }
   });
-  var b = tr.compileAsync('example input', {}).then(function () {
+  return tr.compileAsync('example input', {}).then(function () {
     throw new Error('Expected error');
   }, function (err) {
     if (!(/does not support compiling plain strings/.test(err.message))) throw err;
   });
-  return Promise.all([a, b]);
 });
