@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileFileClientAsync - with tr.compileFileClientAsync(filename, options) => Promise(fn)', function (override) {
+test('compileFileClientAsync', function () {
+
+test('with tr.compileFileClientAsync(filename, options) => Promise(fn)', function (override) {
   var optionsSentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -24,7 +26,7 @@ test('compileFileClientAsync - with tr.compileFileClientAsync(filename, options)
   });
   assert(tr.compileFileClientAsync('example-input.txt', optionsSentinel) === normalizedSentinel);
 });
-test('compileFileClientAsync - with tr.compileFileClient(filename, options) => fn', function (override) {
+test('with tr.compileFileClient(filename, options) => fn', function (override) {
   var optionsSentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -93,7 +95,7 @@ test('compileFileClient - with tr.compileClient(filename, options) => fn', funct
   assert(tr.compileFileClientAsync('example-input.txt', optionsSentinel) === normalizedSentinel);
 });
 
-test('compileFileClientAsync - without tr.compileClient, tr.compileClientAsync, tr.compileFileClient or tr.compileFileClientAsync', function (override) {
+test('without any of the above', function (override) {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -105,4 +107,6 @@ test('compileFileClientAsync - without tr.compileClient, tr.compileClientAsync, 
   }, function (err) {
     if (!/does not support/.test(err.message)) throw err;
   });
+});
+
 });

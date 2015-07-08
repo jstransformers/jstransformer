@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileAsync - with tr.compileAsync(str, options) => Promise(fn)', function (override) {
+test('compileAsync', function () {
+
+test('with tr.compileAsync(str, options) => Promise(fn)', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var cbSentinel = {};
@@ -26,7 +28,7 @@ test('compileAsync - with tr.compileAsync(str, options) => Promise(fn)', functio
   });
   assert(tr.compileAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compileAsync - with tr.compile(str, options) => fn', function () {
+test('with tr.compile(str, options) => fn', function () {
   var sentinel = {};
   var fnSentinel = function (locals) {};
   var tr = createTransformer({
@@ -42,7 +44,7 @@ test('compileAsync - with tr.compile(str, options) => fn', function () {
     assert(out.fn === fnSentinel);
   });
 });
-test('compileAsync - with tr.render(str, options, locals) => output', function () {
+test('with tr.render(str, options, locals) => output', function () {
   var sentinel = {};
   var localsSentinel = {};
   var tr = createTransformer({
@@ -59,7 +61,7 @@ test('compileAsync - with tr.render(str, options, locals) => output', function (
     assert(out.fn(localsSentinel) === 'example output');
   });
 });
-test('compileAsync - without tr.compile, tr.compileAsync, or tr.render', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -71,4 +73,6 @@ test('compileAsync - without tr.compile, tr.compileAsync, or tr.render', functio
   }, function (err) {
     if (!(/does not support compiling plain strings/.test(err.message))) throw err;
   });
+});
+
 });

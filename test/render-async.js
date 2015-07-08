@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('renderAsync - with tr.renderAsync(src, options) => str', function (override) {
+test('renderAsync', function () {
+
+test('with tr.renderAsync(src, options) => str', function (override) {
   var sentinel = {};
   var localSentinel = {};
   var fnSentinel = {};
@@ -27,7 +29,7 @@ test('renderAsync - with tr.renderAsync(src, options) => str', function (overrid
   });
   assert(tr.renderAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('renderAsync - with tr.render(src, options) => str', function (override) {
+test('with tr.render(src, options) => str', function (override) {
   var sentinel = {};
   var localSentinel = {};
   var fnSentinel = {};
@@ -49,7 +51,7 @@ test('renderAsync - with tr.render(src, options) => str', function (override) {
   });
   assert(tr.renderAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('renderAsync - with tr.compileAsync(src, options) => fn', function (override) {
+test('with tr.compileAsync(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -79,7 +81,7 @@ test('renderAsync - with tr.compileAsync(src, options) => fn', function (overrid
   };
   assert(tr.renderAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('renderAsync - with tr.compile(src, options) => fn', function (override) {
+test('with tr.compile(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -126,7 +128,7 @@ test('renderAsync(src, options, locals) - with tr.compile(src, options) => fn', 
       assert.equal( res.body, nameSentinel)
     })
 });
-test('renderAsync - without tr.render', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -154,4 +156,6 @@ test('renderAsync - without tr.render', function () {
     }
   });
   return Promise.all([a, b]);
+});
+
 });

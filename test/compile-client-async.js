@@ -5,7 +5,9 @@ var Promise = require('promise');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileClientAsync - with tr.compileClientAsync(src, options) => Promise(str)', function (override) {
+test('compileClientAsync', function () {
+
+test('with tr.compileClientAsync(src, options) => Promise(str)', function (override) {
   var sentinel = {};
   var bodySentinel = {};
   var cbSentinel = {};
@@ -26,7 +28,7 @@ test('compileClientAsync - with tr.compileClientAsync(src, options) => Promise(s
   });
   assert(tr.compileClientAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compileClientAsync - with tr.compileClient(src, options) => fn', function (override) {
+test('with tr.compileClient(src, options) => fn', function (override) {
   var sentinel = {};
   var bodySentinel = {};
   var cbSentinel = {};
@@ -47,7 +49,7 @@ test('compileClientAsync - with tr.compileClient(src, options) => fn', function 
   });
   assert(tr.compileClientAsync('example input', sentinel, cbSentinel) === normalizedSentinel);
 });
-test('compileClientAsync - without tr.compileClient', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -75,4 +77,6 @@ test('compileClientAsync - without tr.compileClient', function () {
     }
   });
   return Promise.all([a, b]);
+});
+
 });

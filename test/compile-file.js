@@ -4,7 +4,9 @@ var assert = require('assert');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('compileFile - with tr.compileFile(src, options) => fn', function (override) {
+test('compileFile', function () {
+
+test('with tr.compileFile(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -23,7 +25,7 @@ test('compileFile - with tr.compileFile(src, options) => fn', function (override
   });
   assert(tr.compileFile('example input', sentinel) === normalizedSentinel);
 });
-test('compileFile - with tr.compile(src, options) => fn', function (override) {
+test('with tr.compile(src, options) => fn', function (override) {
   var sentinel = {};
   var fnSentinel = {};
   var normalizedSentinel = {};
@@ -46,7 +48,7 @@ test('compileFile - with tr.compile(src, options) => fn', function (override) {
   });
   assert(tr.compileFile('example-input.txt', sentinel) === normalizedSentinel);
 });
-test('compileFile - with tr.renderFile(src, options, locals) => output', function (override) {
+test('with tr.renderFile(src, options, locals) => output', function (override) {
   var sentinel = {};
   var localsSentinel = {};
   var tr = createTransformer({
@@ -61,7 +63,7 @@ test('compileFile - with tr.renderFile(src, options, locals) => output', functio
   });
   assert(tr.compileFile('example-input.txt', sentinel).fn(localsSentinel) === 'example output');
 });
-test('compileFile - with tr.render(src, options, locals) => output', function (override) {
+test('with tr.render(src, options, locals) => output', function (override) {
   var sentinel = {};
   var localsSentinel = {};
   override('readFileSync', function (filename) {
@@ -80,7 +82,7 @@ test('compileFile - with tr.render(src, options, locals) => output', function (o
   });
   assert(tr.compileFile('example-input.txt', sentinel).fn(localsSentinel) === 'example output');
 });
-test('compileFile - without tr.compile, tr.compileFile, tr.render, or tr.renderFile', function () {
+test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -90,4 +92,6 @@ test('compileFile - without tr.compile, tr.compileFile, tr.render, or tr.renderF
   assert.throws(function () {
     tr.compileFile('example input', {});
   }, /does not support synchronous compilation/);
+});
+
 });

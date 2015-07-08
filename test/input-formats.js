@@ -4,7 +4,8 @@ var assert = require('assert');
 var test = require('./test');
 var createTransformer = require('../');
 
-test('inputFormats - with tr.inputFormats', function (override) {
+test('inputFormats', function () {
+test('with tr.inputFormats', function (override) {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -19,7 +20,7 @@ test('inputFormats - with tr.inputFormats', function (override) {
   assert.deepEqual(tr.inputFormats, ['html', 'htm']);
 });
 
-test('inputFormats - without tr.inputFormats', function (override) {
+test('without any of the above', function (override) {
   var tr = createTransformer({
     name: 'test',
     outputFormat: 'html',
@@ -28,4 +29,5 @@ test('inputFormats - without tr.inputFormats', function (override) {
     }
   });
   assert.deepEqual(tr.inputFormats, ['test']);
+});
 });
