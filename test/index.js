@@ -14,11 +14,6 @@ test('constructor - throws if `tr` does not have a name', function () {
     createTransformer({});
   }, /Transformer must have a name/);
 });
-test('constructor - throws if `tr` does not have an output format', function () {
-  assert.throws(function () {
-    createTransformer({name: 'test'});
-  }, /Transformer must have an output format/);
-});
 test('constructor - throws if `tr` does not have any methods', function () {
   assert.throws(function () {
     createTransformer({name: 'test', outputFormat: 'html'});
@@ -39,3 +34,4 @@ require('./compile-file-client-async');
 require('./render');
 require('./render-async');
 require('./input-formats');
+require('./output-format');
