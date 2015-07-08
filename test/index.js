@@ -38,3 +38,4 @@ require('./render-async');
 require('./input-formats');
 require('./output-format');
 require('./normalize');
+require('./normalize-async');
