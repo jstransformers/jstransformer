@@ -35,5 +35,7 @@ require('./compile-file-client');
 require('./compile-file-client-async');
 require('./render');
 require('./render-async');
+require('./render-file');
+require('./render-file-async');
 require('./input-formats');
 require('./output-format');
