@@ -98,6 +98,16 @@ var formats = transformer.inputFormats;
 
 Returns an array of strings representing potential input formats for the transform. If not provided directly by the transform, results in an array containing the name of the transform.
 
+### `.outputFormat`
+
+```js
+var md = require('jstransformer')(require('jstransformer-markdown'))
+var outputFormat = md.outputFormat
+=> 'html'
+```
+
+Returns a string representing the default output format the transform would be expected to return when calling `.render()`.
+
 ## License
 
 MIT
