@@ -39,3 +39,5 @@ require('./render-file');
 require('./render-file-async');
 require('./input-formats');
 require('./output-format');
+require('./normalize');
+require('./normalize-async');
