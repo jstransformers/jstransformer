@@ -1,6 +1,6 @@
 {
   "name": "jstransformer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Normalize the API of any jstransformer",
   "keywords": [
     "jstransformer"
