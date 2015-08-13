@@ -1,3 +1,4 @@
+
 <p align="center"><img src="https://cdn.rawgit.com/jstransformers/jstransformer/2bb6dc6c410e8683a17a4af5f1b73bcbee95aada/logo.svg" width="300px" height="299px" /></p>
 <h1 align="center">JSTransformer</h1>
 <p align="center">Normalize the API of any jstransformer</p>
@@ -47,6 +48,7 @@ Compile a given string and return an object.
 **Params**
 - `<str>` **{String}** string to compile
 - `[options]` **{Object}** optional options to pass to
+- `returns` **{Object}**
 
 **Requires the underlying transform to implement one of following methods**
 - `.compile`
@@ -89,7 +91,7 @@ Compile a string from a given `filepath` synchronously.
 **Params**
 - `<filepath>` **{String}** path to file to compile
 - `[options]` **{Object}** optional options to pass to
-- `returns` **{Promise}**
+- `returns` **{Object}**
 
 **Requires the underlying transform to implement one of following methods**
 - `.compileFile`
@@ -100,7 +102,7 @@ Compile a string from a given `filepath` synchronously.
 **Example**
 
 ```js
-transformer.compileFile(filepath, options)
+transformer.compileFile(filepath, options);
 //=> {fn: Function, dependencies: Array.<String>}
 ```
 
@@ -150,6 +152,7 @@ Render a given string and return an object.
 - `<str>` **{String}** string to render
 - `[options]` **{Object}** optional options to pass to
 - `[locals]` **{Object}** template context, also known as locals
+- `returns` **{Object}**
 
 **Requires the underlying transform to implement one of following methods**
 - `.compile`
@@ -195,7 +198,7 @@ Render a string from a given `filepath` synchronously.
 - `<filepath>` **{String}** path to file to compile
 - `[options]` **{Object}** optional options to pass to
 - `[locals]` **{Object}** template context, also known as locals
-- `returns` **{Promise}**
+- `returns` **{Object}**
 
 **Requires the underlying transform to implement one of following methods**
 - `.renderFile`
@@ -206,7 +209,7 @@ Render a string from a given `filepath` synchronously.
 **Example**
 
 ```js
-transformer.renderFile(filepath, options, locals)
+transformer.renderFile(filepath, options, locals);
 //=> {fn: Function, dependencies: Array.<String>}
 ```
 
