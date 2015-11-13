@@ -173,6 +173,8 @@ Transformer.prototype.compileFile = function (filename, options) {
       return tr.normalize(this._tr.renderFile(filename, options, locals)).body;
     }.bind(this));
   } else { // render || compile
+    if (!options) options = {};
+    if (options.filename === undefined) options.filename = filename;
     return this.compile(tr.readFileSync(filename, 'utf8'), options);
   }
 };
@@ -185,6 +187,8 @@ Transformer.prototype.compileFileAsync = function (filename, options, cb) {
   } else if (this._hasMethod('compileFile') || this._hasMethod('renderFile')) {
     return tr.normalizeFnAsync(this.compileFile(filename, options), cb);
   } else { // compileAsync || compile || render
+    if (!options) options = {};
+    if (options.filename === undefined) options.filename = filename;
     return tr.normalizeFnAsync(tr.readFile(filename, 'utf8').then(function (str) {
       if (this._hasMethod('compileAsync')) {
         return this._tr.compileAsync(str, options);
@@ -235,6 +239,8 @@ Transformer.prototype.compileFileClient = function (filename, options) {
   if (this._hasMethod('compileFileClient')) {
     return tr.normalize(this._tr.compileFileClient(filename, options));
   } else {
+    if (!options) options = {};
+    if (options.filename === undefined) options.filename = filename;
     return tr.normalize(this._tr.compileClient(tr.readFileSync(filename, 'utf8'), options));
   }
 };
@@ -247,6 +253,8 @@ Transformer.prototype.compileFileClientAsync = function (filename, options, cb) 
   } else if (this._hasMethod('compileFileClient')) {
     return tr.normalizeAsync(this._tr.compileFileClient(filename, options), cb);
   } else {
+    if (!options) options = {};
+    if (options.filename === undefined) options.filename = filename;
     return tr.normalizeAsync(tr.readFile(filename, 'utf8').then(function (str) {
       if (this._hasMethod('compileClientAsync')) {
         return this._tr.compileClientAsync(str, options);
@@ -310,6 +318,8 @@ Transformer.prototype.renderFile = function (filename, options, locals) {
   if (this._hasMethod('renderFile')) {
     return tr.normalize(this._tr.renderFile(filename, options, locals));
   } else if (this._hasMethod('render')) {
+    if (!options) options = {};
+    if (options.filename === undefined) options.filename = filename;
     return tr.normalize(this._tr.render(tr.readFileSync(filename, 'utf8'), options, locals));
   } else { // compile || compileFile
     var compiled = this.compileFile(filename, options);
@@ -335,6 +345,8 @@ Transformer.prototype.renderFileAsync = function (filename, options, locals, cb)
       return {body: compiled.fn(locals || options), dependencies: compiled.dependencies};
     }), cb);
   } else { // render || renderAsync
+    if (!options) options = {};
+    if (options.filename === undefined) options.filename = filename;
     return tr.normalizeAsync(tr.readFile(filename, 'utf8').then(function (str) {
       return this.renderAsync(str, options, locals);
     }.bind(this)), cb);
