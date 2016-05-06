@@ -13,8 +13,13 @@ tr.normalizeFn = normalizeFn;
 tr.normalizeFnAsync = normalizeFnAsync;
 tr.normalize = normalize;
 tr.normalizeAsync = normalizeAsync;
-tr.readFile = Promise.denodeify(fs.readFile);
-tr.readFileSync = fs.readFileSync;
+if (fs.readFile) {
+  tr.readFile = Promise.denodeify(fs.readFile);
+  tr.readFileSync = fs.readFileSync;
+} else {
+  tr.readFile = function () { throw new Error('fs.readFile unsupported'); };
+  tr.readFileSync = function () { throw new Error('fs.readFileSync unsupported'); };
+}
 
 function normalizeFn(result) {
   if (typeof result === 'function') {
