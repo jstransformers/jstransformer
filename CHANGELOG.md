@@ -2,9 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
+## [1.0.0] - 2016-06-06
+### Changed
+- Browser support is fixed
+- Marked as stable
 
-## [0.0.4][0.0.4]
+## [0.0.4] - 2015-11-23
 ### Changed
 - Switched to [Keep a Changelog](http://keepachangelog.com/) spec for CHANGELOG.md
 - Creates an `options.filename` for `*File()` functions, if one is not provided
@@ -29,7 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release
 
-[unreleased]: https://github.com/jstransformers/jstransformer/compare/0.0.4...HEAD
+[1.0.0]: https://github.com/jstransformers/jstransformer/compare/0.0.4...1.0.0
 [0.0.4]: https://github.com/jstransformers/jstransformer/compare/0.0.3...0.0.4
 [0.0.3]: https://github.com/jstransformers/jstransformer/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/jstransformers/jstransformer/compare/0.0.1...0.0.2
