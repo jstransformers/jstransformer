@@ -174,6 +174,16 @@ var outputFormat = md.outputFormat
 
 Returns a string representing the default output format the transform would be expected to return when calling `.render()`.
 
+### `.can`
+
+```js
+var md = require('jstransformer')(require('jstransformer-markdown'))
+md.can('render');
+=> true
+```
+
+Takes a method name as a string and returns a boolean value indicating whether the normalised transform implements this method.
+
 ## License
 
 MIT
