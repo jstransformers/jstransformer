@@ -90,6 +90,67 @@ _requires the underlying transform to implement `.renderFileAsync`, `.renderFile
 
 Transform a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
+### Returned object from `.compile*`
+
+```js
+{fn: Function, dependencies: Array.<String>}
+```
+
+ - `fn` represents the result as a string
+ - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
+
+### `.compile`
+
+```js
+transformer.compile(str[, options]);
+=> {fn: Function, dependencies: Array.<String>}
+```
+
+_requires the underlying transform to implement `.compile` or `.render`_
+
+Compile a string and return an object.
+
+### `.compileAsync`
+
+```js
+transformer.compileAsync(str[, options], callback);
+```
+
+```js
+transformer.compileAsync(str[, options]);
+=> Promise({fn: Function, dependencies: Array.<String>})
+```
+
+_requires the underlying transform to implement `.compileAsync`, `.compile` or `.render`_
+
+Compile a string asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
+
+### `.compileFile`
+
+```js
+transformer.compileFile(filename[, options])
+=> {fn: Function, dependencies: Array.<String>}
+```
+
+_requires the underlying transform to implement `.compileFile`, `.compile`, `.renderFile`, or `.render`_
+
+Compile a file and return an object.
+
+### `.compileFileAsync`
+
+```js
+transformer.compileFileAsync(filename[, options], callback);
+```
+
+```js
+transformer.compileFileAsync(filename[, options]);
+=> Promise({fn: Function, dependencies: Array.<String>})
+```
+
+_requires the underlying transform to implement `.compileFileAsync`, `.compileFile`, `.compileAsync`, `.compile`, `.renderFileAsync`, `.renderFile`, or `.render`_
+
+Compile a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
+
 ### `.inputFormats`
 
 ```js
