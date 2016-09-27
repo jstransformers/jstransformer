@@ -60,7 +60,7 @@ transformer.renderAsync(str[, options], locals);
 => Promise({body: String, dependencies: Array.<String>})
 ```
 
-_requires the underlying transform to implement `.renderAsync` or `.render`_
+_requires the underlying transform to implement `.renderAsync`, `.render`, `.compile`, or `.compileAsync`_
 
 Transform a string asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
@@ -86,7 +86,7 @@ transformer.renderFileAsync(filename[, options], locals);
 => Promise({body: String, dependencies: Array.<String>})
 ```
 
-_requires the underlying transform to implement `.renderFileAsync`, `.renderFile`, `.renderAsync`, `.render`, `.compileFileAsync`, `.compileFile`, `.compileAsync`, or `.compileFile`_
+_requires the underlying transform to implement `.renderFileAsync`, `.renderFile`, `.renderAsync`, `.render`, `.compileFileAsync`, `.compileFile`, `.compileAsync`, or `.compile`_
 
 Transform a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
