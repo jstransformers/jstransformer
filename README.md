@@ -29,7 +29,9 @@ This gives the same API regardless of the jstransformer passed in.
 
 A transformer, once normalised using this module, will implement the following methods.  Note that if the underlying transformer cannot be used to implement the functionality, it may ultimately just throw an error.
 
-### Returned object from `.render*`
+### `.render*`
+
+#### Returned object from `.render*`
 
 ```js
 {body: String, dependencies: Array.<String>}
@@ -38,7 +40,7 @@ A transformer, once normalised using this module, will implement the following m
  - `body` represents the result as a string
  - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
 
-### `.render`
+#### `.render`
 
 ```js
 transformer.render(str, options, locals);
@@ -49,7 +51,7 @@ _requires the underlying transform to implement `.render` or `.compile`_
 
 Transform a string and return an object.
 
-### `.renderAsync`
+#### `.renderAsync`
 
 ```js
 transformer.renderAsync(str[, options], locals, callback);
@@ -64,7 +66,7 @@ _requires the underlying transform to implement `.renderAsync`, `.render`, `.com
 
 Transform a string asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
-### `.renderFile`
+#### `.renderFile`
 
 ```js
 transformer.renderFile(filename, options, locals)
@@ -75,7 +77,7 @@ _requires the underlying transform to implement `.renderFile`, `.render`, `.comp
 
 Transform a file and return an object.
 
-### `.renderFileAsync`
+#### `.renderFileAsync`
 
 ```js
 transformer.renderFileAsync(filename[, options], locals, callback);
@@ -90,7 +92,9 @@ _requires the underlying transform to implement `.renderFileAsync`, `.renderFile
 
 Transform a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
-### Returned object from `.compile*`
+### `.compile*`
+
+#### Returned object from `.compile*`
 
 ```js
 {fn: Function, dependencies: Array.<String>}
@@ -99,7 +103,7 @@ Transform a file asynchronously. If a callback is provided, it is called as `cal
  - `fn` represents the result as a string
  - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
 
-### `.compile`
+#### `.compile`
 
 ```js
 transformer.compile(str[, options]);
@@ -110,7 +114,7 @@ _requires the underlying transform to implement `.compile` or `.render`_
 
 Compile a string and return an object.
 
-### `.compileAsync`
+#### `.compileAsync`
 
 ```js
 transformer.compileAsync(str[, options], callback);
@@ -125,7 +129,7 @@ _requires the underlying transform to implement `.compileAsync`, `.compile` or `
 
 Compile a string asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
-### `.compileFile`
+#### `.compileFile`
 
 ```js
 transformer.compileFile(filename[, options])
@@ -136,7 +140,7 @@ _requires the underlying transform to implement `.compileFile`, `.compile`, `.re
 
 Compile a file and return an object.
 
-### `.compileFileAsync`
+#### `.compileFileAsync`
 
 ```js
 transformer.compileFileAsync(filename[, options], callback);
