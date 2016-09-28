@@ -155,6 +155,69 @@ _requires the underlying transform to implement `.compileFileAsync`, `.compileFi
 
 Compile a file asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
 
+### `.compileClient*`
+
+#### Returned object from `.compileClient*`
+
+```js
+{body: String, dependencies: Array.<String>}
+```
+
+ - `body` is a `.toString`ed function that can be used on the client side.
+ - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
+
+#### `.compileClient`
+
+```js
+transformer.compileClient(str[, options]);
+=> {body: String, dependencies: Array.<String>}
+```
+
+_requires the underlying transform to implement `.compileClient`_
+
+Compile a string for client-side use and return an object.
+
+#### `.compileClientAsync`
+
+```js
+transformer.compileClientAsync(str[, options], callback);
+```
+
+```js
+transformer.compileClientAsync(str[, options]);
+=> Promise({body: String, dependencies: Array.<String>})
+```
+
+_requires the underlying transform to implement `.compileClientAsync` or `.compileClient`_
+
+Compile a string for client-side use asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
+
+#### `.compileFileClient`
+
+```js
+transformer.compileFileClient(filename[, options])
+=> {body: String, dependencies: Array.<String>}
+```
+
+_requires the underlying transform to implement `.compileFileClient` or `.compileClient`_
+
+Compile a file for client-side use and return an object.
+
+#### `.compileFileClientAsync`
+
+```js
+transformer.compileFileClientAsync(filename[, options], callback);
+```
+
+```js
+transformer.compileFileClientAsync(filename[, options]);
+=> Promise({body: String, dependencies: Array.<String>})
+```
+
+_requires the underlying transform to implement `.compileFileClientAsync`, `.compileFileClient`, `.compileClientAsync`, or `.compileClient`_
+
+Compile a file for client-side use asynchronously. If a callback is provided, it is called as `callback(err, data)`, otherwise a Promise is returned.
+
 ### `.inputFormats`
 
 ```js
