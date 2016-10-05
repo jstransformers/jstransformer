@@ -38,7 +38,7 @@ A transformer, once normalised using this module, will implement the following m
 ```
 
  - `body` represents the result as a string
- - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
+ - `dependencies` is an array of file names that were read in as part of the render process (or an empty array if there were no dependencies)
 
 #### `.render`
 
@@ -100,8 +100,8 @@ Transform a file asynchronously. If a callback is provided, it is called as `cal
 {fn: Function, dependencies: Array.<String>}
 ```
 
- - `fn` represents the result as a string
- - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
+ - `fn` is a function that takes a locals object and returns the rendered template as a string.
+ - `dependencies` is an array of file names that were read in as part of the compilation process (or an empty array if there were no dependencies)
 
 #### `.compile`
 
@@ -164,7 +164,7 @@ Compile a file asynchronously. If a callback is provided, it is called as `callb
 ```
 
  - `body` is a `.toString`ed function that can be used on the client side.
- - `dependencies` is an array of files that were read in as part of the render process (or an empty array if there were no dependencies)
+ - `dependencies` is an array of file names that were read in as part of the compilation process (or an empty array if there were no dependencies)
 
 #### `.compileClient`
 
