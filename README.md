@@ -8,6 +8,8 @@
 <a href="https://coveralls.io/r/jstransformers/jstransformer?branch=master"><img src="https://img.shields.io/coveralls/jstransformers/jstransformer/master.svg" alt="Coverage Status"></a>
 <a href="https://www.npmjs.org/package/jstransformer"><img src="https://img.shields.io/npm/v/jstransformer.svg" alt="NPM version"></a></p>
 
+There are many good template engines and compilers written for Node.js. But there is a problem: all of them have slightly different APIs, requiring slightly different usage. JSTransformer unifies them into one standardized API. Code written for one transformer will work with any other transformer. There are over 100 transformers, ranging from Markdown parsers to template engines to code compilers. You can view the full list [here](https://www.npmjs.com/browse/keyword/jstransformer).
+
 ## Installation
 
     npm install jstransformer
