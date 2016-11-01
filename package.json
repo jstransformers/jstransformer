@@ -16,7 +16,7 @@
     "test": "test-jstransformer"
   },
   "engines": {
-    "node": ">=0.10.36"
+    "node": ">=4"
   },
   "repository": {
     "type": "git",
