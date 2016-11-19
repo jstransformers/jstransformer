@@ -159,6 +159,12 @@ Transformer.prototype.compile = function (str, options) {
 };
 Transformer.prototype.compileAsync = function (str, options, cb) {
   if (!this.can('compileAsync')) { // compileFile* || renderFile* || renderAsync || compile*Client*
+    if (this.can('renderAsync')) {
+      var customCompile = function (str, options) {
+        return this.renderAsync(str, options);
+      }
+      return tr.normalizeFnAsync(customCompile, cb);
+    }
     return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
   }
   if (this._hasMethod('compileAsync')) {
