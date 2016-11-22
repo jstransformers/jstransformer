@@ -104,7 +104,7 @@ function Transformer(tr) {
 
 var fallbacks = {
   compile: ['compile', 'render'],
-  compileAsync: ['compileAsync', 'compile', 'render'],
+  compileAsync: ['compileAsync', 'compile', 'renderAsync', 'render'],
   compileFile: ['compileFile', 'compile', 'renderFile', 'render'],
   compileFileAsync: [
     'compileFileAsync', 'compileFile', 'compileAsync', 'compile',
@@ -163,6 +163,13 @@ Transformer.prototype.compileAsync = function (str, options, cb) {
   }
   if (this._hasMethod('compileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileAsync(str, options), cb);
+  } else if (this._hasMethod('renderAsync')) {
+    var customCompile = function (str, options) {
+      return function (locals) {
+        return this.renderAsync(str, options, locals);
+      }
+    }
+    return tr.normalizeFnAsync(customCompile, cb);
   } else { // render || compile
     return tr.normalizeFnAsync(this.compile(str, options), cb);
   }

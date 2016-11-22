@@ -61,6 +61,22 @@ test('with tr.render(str, options, locals) => output', function () {
     assert(out.fn(localsSentinel) === 'example output');
   });
 });
+test('with tr.renderAsync(str, options, locals) => Promise(fn)', function () {
+  var sentinel = {};
+  var localsSentinel = {};
+  var tr = createTransformer({
+    name: 'test',
+    outputFormat: 'html',
+    renderAsync: function (str, options, locals) {
+      return new Promise(function (resolve, reject) {
+        resolve('example output')
+      })
+    }
+  });
+  return tr.compileAsync('example input', sentinel).then(function (out) {
+    assert(out.fn(localsSentinel) === 'example output');
+  });
+});
 test('without any of the above', function () {
   var tr = createTransformer({
     name: 'test',
