@@ -12,6 +12,8 @@ There are many good template engines and compilers written for Node.js. But ther
 
 ## Installation
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jstransformers/jstransformer.svg)](https://greenkeeper.io/)
+
     npm install jstransformer
 
 ## Usage
