@@ -5,14 +5,13 @@
 <p align="center"><a href="https://travis-ci.org/jstransformers/jstransformer"><img src="https://img.shields.io/travis/jstransformers/jstransformer/master.svg" alt="Build Status"></a>
 <a href="https://david-dm.org/jstransformers/jstransformer"><img src="https://img.shields.io/david/jstransformers/jstransformer.svg" alt="Dependency Status"></a>
 <a href="https://david-dm.org/jstransformers/jstransformer#info=devDependencies"><img src="https://img.shields.io/david/dev/jstransformers/jstransformer.svg" alt="Developers' Dependency Status"></a>
+<a href="https://greenkeeper.io"><img src="https://badges.greenkeeper.io/jstransformers/jstransformer.svg" alt="Greenkeeper badge"></a>
 <a href="https://coveralls.io/r/jstransformers/jstransformer?branch=master"><img src="https://img.shields.io/coveralls/jstransformers/jstransformer/master.svg" alt="Coverage Status"></a>
 <a href="https://www.npmjs.org/package/jstransformer"><img src="https://img.shields.io/npm/v/jstransformer.svg" alt="NPM version"></a></p>
 
 There are many good template engines and compilers written for Node.js. But there is a problem: all of them have slightly different APIs, requiring slightly different usage. JSTransformer unifies them into one standardized API. Code written for one transformer will work with any other transformer. There are over 100 transformers, ranging from Markdown parsers to template engines to code compilers. You can view the full list [here](https://www.npmjs.com/browse/keyword/jstransformer).
 
 ## Installation
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/jstransformers/jstransformer.svg)](https://greenkeeper.io/)
 
     npm install jstransformer
 
