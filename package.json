@@ -7,7 +7,7 @@
   ],
   "dependencies": {
     "is-promise": "^2.0.0",
-    "promise": "^7.0.1"
+    "promise": "^8.0.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
