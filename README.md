@@ -22,7 +22,7 @@ Use JSTransformer Boilerplate to create and update transformers.
 ## API
 
 ```js
-var foo = require('jstransformer')(require('jstransformer-foo'));
+var foo = require('jstransformer')(require('jstransformer-foo'))
 
 foo.render('blah').body
 //=> 'blah'
