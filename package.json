@@ -10,7 +10,7 @@
     "promise": "^8.0.1"
   },
   "devDependencies": {
-    "coveralls": "^2.11.2",
+    "coveralls": "^3.0.0",
     "istanbul": "^0.4.0",
     "testit": "^3.0.0"
   },
