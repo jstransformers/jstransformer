@@ -1,7 +1,7 @@
 {
   "name": "jstransformer",
   "version": "1.0.0",
-  "description": "Normalize the API of any jstransformer",
+  "description": "Normalize the API of any JSTransformer.",
   "keywords": [
     "jstransformer"
   ],
@@ -22,10 +22,16 @@
   "files": [
     "index.js"
   ],
+  "engines": {
+    "node": ">=4"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jstransformers/jstransformer.git"
   },
-  "author": "ForbesLindesay",
+  "author": {
+    "name": "JSTransformers Team",
+    "url": "http://github.com/orgs/jstransformers/people"
+  },
   "license": "MIT"
 }
