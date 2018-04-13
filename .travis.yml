@@ -14,8 +14,7 @@ after_success:
   - codecov -f coverage/coverage.json
 
 notifications:
-  email:
-    on_success: never
+  email: false
 
 cache:
   directories:
