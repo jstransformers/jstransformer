@@ -13,7 +13,6 @@
     "xo": "*"
   },
   "scripts": {
-    "coverage": "test-jstransformer coverage",
     "test": "test-jstransformer",
     "posttest": "xo --space=2 --no-semicolon index.js"
   },
