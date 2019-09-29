@@ -10,14 +10,10 @@
     "promise": "^8.0.1"
   },
   "devDependencies": {
-    "coveralls": "^3.0.0",
-    "istanbul": "^0.4.0",
     "testit": "^3.0.0"
   },
   "scripts": {
-    "test": "node test",
-    "coverage": "istanbul cover test",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
+    "test": "node test"
   },
   "files": [
     "index.js"

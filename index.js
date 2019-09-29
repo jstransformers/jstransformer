@@ -8,6 +8,7 @@ var isPromise = require('is-promise');
 var tr = (module.exports = function (transformer) {
   return new Transformer(transformer);
 });
+
 tr.Transformer = Transformer;
 tr.normalizeFn = normalizeFn;
 tr.normalizeFnAsync = normalizeFnAsync;
@@ -37,6 +38,7 @@ function normalizeFn(result) {
     throw new Error('Invalid result object from transform.');
   }
 }
+
 function normalizeFnAsync(result, cb) {
   return Promise.resolve(result).then(function (result) {
     if (result && isPromise(result.fn)) {
@@ -48,6 +50,7 @@ function normalizeFnAsync(result, cb) {
     return result;
   }).then(tr.normalizeFn).nodeify(cb);
 }
+
 function normalize(result) {
   if (typeof result === 'string') {
     return {body: result, dependencies: []};
@@ -64,6 +67,7 @@ function normalize(result) {
     throw new Error('Invalid result object from transform.');
   }
 }
+
 function normalizeAsync(result, cb) {
   return Promise.resolve(result).then(function (result) {
     if (result && isPromise(result.body)) {
@@ -128,6 +132,7 @@ var fallbacks = {
 Transformer.prototype._hasMethod = function (method) {
   return typeof this._tr[method] === 'function';
 };
+
 Transformer.prototype.can = function (method) {
   return fallbacks[method].some(function (method) {
     return this._hasMethod(method);
@@ -157,6 +162,7 @@ Transformer.prototype.compile = function (str, options) {
   }
   return tr.normalizeFn(this._tr.compile(str, options));
 };
+
 Transformer.prototype.compileAsync = function (str, options, cb) {
   if (!this.can('compileAsync')) { // compileFile* || renderFile* || renderAsync || compile*Client*
     return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
@@ -167,6 +173,7 @@ Transformer.prototype.compileAsync = function (str, options, cb) {
     return tr.normalizeFnAsync(this.compile(str, options), cb);
   }
 };
+
 Transformer.prototype.compileFile = function (filename, options) {
   if (!this.can('compileFile')) { // compile*Client* || compile*Async || render*Async
     throw new Error('The Transform "' + this.name + '" does not support synchronous compilation');
@@ -183,6 +190,7 @@ Transformer.prototype.compileFile = function (filename, options) {
     return this.compile(tr.readFileSync(filename, 'utf8'), options);
   }
 };
+
 Transformer.prototype.compileFileAsync = function (filename, options, cb) {
   if (!this.can('compileFileAsync')) {
     return Promise.reject(new Error('The Transform "' + this.name + '" does not support compilation'));
@@ -219,6 +227,7 @@ Transformer.prototype.compileClient = function (str, options) {
   }
   return tr.normalize(this._tr.compileClient(str, options));
 };
+
 Transformer.prototype.compileClientAsync = function (str, options, cb) {
   if (!this.can('compileClientAsync')) {
     if (this.can('compileFileClientAsync')) {
@@ -233,6 +242,7 @@ Transformer.prototype.compileClientAsync = function (str, options, cb) {
     return tr.normalizeAsync(this._tr.compileClient(str, options), cb);
   }
 };
+
 Transformer.prototype.compileFileClient = function (filename, options) {
   if (!this.can('compileFileClient')) {
     if (this.can('compileFileClientAsync')) {
@@ -249,6 +259,7 @@ Transformer.prototype.compileFileClient = function (filename, options) {
     return tr.normalize(this._tr.compileClient(tr.readFileSync(filename, 'utf8'), options));
   }
 };
+
 Transformer.prototype.compileFileClientAsync = function (filename, options, cb) {
   if (!this.can('compileFileClientAsync')) {
     return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client')).nodeify(cb)
@@ -293,6 +304,7 @@ Transformer.prototype.render = function (str, options, locals) {
     return tr.normalize({body: body, dependencies: compiled.dependencies});
   }
 };
+
 Transformer.prototype.renderAsync = function (str, options, locals, cb) {
   if (typeof locals === 'function') {
     cb = locals;
@@ -315,6 +327,7 @@ Transformer.prototype.renderAsync = function (str, options, locals, cb) {
     }), cb);
   }
 };
+
 Transformer.prototype.renderFile = function (filename, options, locals) {
   if (!this.can('renderFile')) { // *Async, *Client
     throw new Error('The Transform "' + this.name + '" does not support rendering synchronously.');
@@ -331,6 +344,7 @@ Transformer.prototype.renderFile = function (filename, options, locals) {
     return tr.normalize({body: compiled.fn(locals || options), dependencies: compiled.dependencies});
   }
 };
+
 Transformer.prototype.renderFileAsync = function (filename, options, locals, cb) {
   if (!this.can('renderFileAsync')) { // *Client
     throw new Error('The Transform "' + this.name + '" does not support rendering.');
