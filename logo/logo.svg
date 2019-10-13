@@ -1,166 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="500"
-   height="500"
-   id="svg2"
-   version="1.1"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="JSTransformers-Proposal.svg">
-  <title
-     id="title5814">JSTransfomers Logo</title>
-  <defs
-     id="defs4">
-    <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0.0"
-       refX="0.0"
-       id="TriangleOutL"
-       style="overflow:visible">
-      <path
-         id="path3927"
-         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
-         transform="scale(0.8)" />
-    </marker>
-  </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="249.47484"
-     inkscape:cy="251.09125"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="838"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>JSTransfomers Logo</dc:title>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Archie Sullivan</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title>CC BY-SA 2.0</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date>12 October 2019</dc:date>
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
-      </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Notice" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Attribution" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-552.36218)">
-    <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 0,26.428571 144.453,0 0,74.462429"
-       id="path3755"
-       inkscape:connector-curvature="0"
-       transform="translate(0,552.36218)"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="M 28.777,334.081 28.777,230 0,230"
-       id="path3757"
-       inkscape:connector-curvature="0"
-       transform="translate(0,552.36218)"
-       sodipodi:nodetypes="ccc" />
-    <text
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:monospace;-inkscape-font-specification:monospace"
-       x="213.0029"
-       y="953.0083"
-       id="text3775"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3777"
-         x="213.0029"
-         y="953.0083">{TRANSFORMERS}</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="path5776"
-       d="m 105.15926,697.47825 0,95.9645"
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#TriangleOutL)" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:44.07058716;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 449.424,678.54318 c 0,0 -126.06527,-1.07587 -162.31813,-3.2e-4 -36.25286,1.07555 -54.53444,30.10197 -54.61202,58.89967 -0.0776,28.79769 18.04886,57.36666 54.61202,57.5273 36.56316,0.16064 86.16639,0.008 114.28234,0 28.11595,-0.008 43.51882,32.89476 43.19127,59.95241 -0.32755,27.05765 -16.38553,51.75643 -43.19127,52.368 -53.111,1.21172 -184.63892,-0.71412 -184.63892,-0.71412"
-       id="path5778"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="czszzzsc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 475.78185,0 0,126.181 -26.35785,0"
-       id="path5780"
-       inkscape:connector-curvature="0"
-       transform="translate(0,552.36218)"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 216.74877,358.571 -34.92154,0 2.3e-4,141.429"
-       id="path5782"
-       inkscape:connector-curvature="0"
-       transform="translate(0,552.36218)"
-       sodipodi:nodetypes="ccc" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path5776-4"
-       d="m 446.33483,642.36218 -95.9645,0"
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#TriangleOutL)" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#TriangleOutL)"
-       d="m 219.37947,867.09104 95.9645,0"
-       id="path5808"
-       inkscape:connector-curvature="0" />
-    <path
-       sodipodi:nodetypes="czsc"
-       inkscape:connector-curvature="0"
-       id="path5812"
-       d="m 27.73349,863.19006 c -0.1778,28.11539 32.631337,43.71669 59.690472,43.55255 27.059138,-0.16413 55.854368,-16.0485 56.627818,-42.85005 1.53246,-53.10272 0.40122,-210.63938 0.40122,-210.63938"
-       style="fill:none;stroke:#000000;stroke-width:44.07058716;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-  </g>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg2" height="500" width="500">
+<title id="title5814">JSTransfomers Logo</title>
+<defs id="defs4">
+<marker style="overflow:visible" id="TriangleOutL" refX="0.0" refY="0.0" orient="auto">
+<path transform="scale(0.8)" style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt" d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z " id="path3927" />
+</marker>
+</defs>
+<metadata id="metadata7">
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+<dc:title>JSTransfomers Logo</dc:title>
+<dc:creator>
+<cc:Agent>
+<dc:title>Archie Sullivan</dc:title>
+</cc:Agent>
+</dc:creator>
+<dc:rights>
+<cc:Agent>
+<dc:title>CC BY-SA 2.0</dc:title>
+</cc:Agent>
+</dc:rights>
+<dc:date>12 October 2019</dc:date>
+<cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+</cc:Work>
+<cc:License rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
+<cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction" />
+<cc:permits rdf:resource="http://creativecommons.org/ns#Distribution" />
+<cc:requires rdf:resource="http://creativecommons.org/ns#Notice" />
+<cc:requires rdf:resource="http://creativecommons.org/ns#Attribution" />
+<cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+<cc:requires rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+</cc:License>
+</rdf:RDF>
+</metadata>
+<g transform="translate(0,-552.36218)" id="layer1">
+<path transform="translate(0,552.36218)" id="path3755" d="m 0,26.428571 144.453,0 0,74.462429" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+<path transform="translate(0,552.36218)" id="path3757" d="M 28.777,334.081 28.777,230 0,230" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+<text id="text3775" y="953.0083" x="213.0029" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:monospace;-inkscape-font-specification:monospace;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" xml:space="preserve">
+<tspan style="font-size:24px;line-height:1.25" y="953.0083" x="213.0029" id="tspan3777">{TRANSFORMERS}</tspan></text>
+<path style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#TriangleOutL)" d="m 105.15926,697.47825 0,95.9645" id="path5776" />
+<path id="path5778" d="m 449.424,678.54318 c 0,0 -126.06527,-1.07587 -162.31813,-3.2e-4 -36.25286,1.07555 -54.53444,30.10197 -54.61202,58.89967 -0.0776,28.79769 18.04886,57.36666 54.61202,57.5273 36.56316,0.16064 86.16639,0.008 114.28234,0 28.11595,-0.008 43.51882,32.89476 43.19127,59.95241 -0.32755,27.05765 -16.38553,51.75643 -43.19127,52.368 -53.111,1.21172 -184.63892,-0.71412 -184.63892,-0.71412" style="fill:none;stroke:#000000;stroke-width:44.07058716;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+<path transform="translate(0,552.36218)" id="path5780" d="m 475.78185,0 0,126.181 -26.35785,0" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+<path transform="translate(0,552.36218)" id="path5782" d="m 216.74877,358.571 -34.92154,0 2.3e-4,141.429" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+<path style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#TriangleOutL)" d="m 446.33483,642.36218 -95.9645,0" id="path5776-4" />
+<path id="path5808" d="m 219.37947,867.09104 95.9645,0" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#TriangleOutL)" />
+<path style="fill:none;stroke:#000000;stroke-width:44.07058716;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" d="m 27.73349,863.19006 c -0.1778,28.11539 32.631337,43.71669 59.690472,43.55255 27.059138,-0.16413 55.854368,-16.0485 56.627818,-42.85005 1.53246,-53.10272 0.40122,-210.63938 0.40122,-210.63938" id="path5812" />
+</g>
 </svg>
