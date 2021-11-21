@@ -18,7 +18,6 @@ build/Release
 
 # Dependency management
 node_modules
-package-lock.json
 
 # Users Environment Variables
 .lock-wscript

@@ -6,11 +6,11 @@
     "jstransformer"
   ],
   "dependencies": {
-    "is-promise": "^2.0.0",
-    "promise": "^8.0.1"
+    "is-promise": "^4.0.0",
+    "promise": "^8.1.0"
   },
   "devDependencies": {
-    "testit": "^3.0.0"
+    "testit": "^3.1.0"
   },
   "scripts": {
     "test": "node test"
