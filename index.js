@@ -2,8 +2,6 @@
 
 var fs = require('fs');
 var assert = require('assert');
-var Promise = require('promise');
-var isPromise = require('is-promise');
 
 var tr = (module.exports = function (transformer) {
   return new Transformer(transformer);
@@ -14,13 +12,8 @@ tr.normalizeFn = normalizeFn;
 tr.normalizeFnAsync = normalizeFnAsync;
 tr.normalize = normalize;
 tr.normalizeAsync = normalizeAsync;
-if (fs.readFile) {
-  tr.readFile = Promise.denodeify(fs.readFile);
-  tr.readFileSync = fs.readFileSync;
-} else {
-  tr.readFile = function () { throw new Error('fs.readFile unsupported'); };
-  tr.readFileSync = function () { throw new Error('fs.readFileSync unsupported'); };
-}
+tr.readFile = fs.readFile;
+tr.readFileSync = fs.readFileSync;
 
 function normalizeFn(result) {
   if (typeof result === 'function') {
@@ -40,15 +33,15 @@ function normalizeFn(result) {
 }
 
 function normalizeFnAsync(result, cb) {
-  return Promise.resolve(result).then(function (result) {
-    if (result && isPromise(result.fn)) {
+  return promiseOrCallback(cb, null, Promise.resolve(result).then(function (result) {
+    if (result && result.fn instanceof Promise) {
       return result.fn.then(function (fn) {
         result.fn = fn;
         return result;
       });
     }
     return result;
-  }).then(tr.normalizeFn).nodeify(cb);
+  }).then(tr.normalizeFn));
 }
 
 function normalize(result) {
@@ -69,15 +62,24 @@ function normalize(result) {
 }
 
 function normalizeAsync(result, cb) {
-  return Promise.resolve(result).then(function (result) {
-    if (result && isPromise(result.body)) {
+  return promiseOrCallback(cb, null, Promise.resolve(result).then(function (result) {
+    if (result && result.body instanceof Promise) {
       return result.body.then(function (body) {
         result.body = body;
         return result;
       });
     }
     return result;
-  }).then(tr.normalize).nodeify(cb);
+  }).then(tr.normalize))
+}
+
+function promiseOrCallback(cb, err, result) {
+  if (typeof cb === 'function') {
+    cb(err, result)
+  } else {
+    if (err) return Promise.reject(err)
+    return result instanceof Promise ? result : Promise.resolve(result)
+  }
 }
 
 function Transformer(tr) {
@@ -165,7 +167,7 @@ Transformer.prototype.compile = function (str, options) {
 
 Transformer.prototype.compileAsync = function (str, options, cb) {
   if (!this.can('compileAsync')) { // compileFile* || renderFile* || renderAsync || compile*Client*
-    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling plain strings')).nodeify(cb);
+    return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support compiling plain strings'));
   }
   if (this._hasMethod('compileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileAsync(str, options), cb);
@@ -193,7 +195,7 @@ Transformer.prototype.compileFile = function (filename, options) {
 
 Transformer.prototype.compileFileAsync = function (filename, options, cb) {
   if (!this.can('compileFileAsync')) {
-    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compilation'));
+    return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support compilation'));
   }
   if (this._hasMethod('compileFileAsync')) {
     return tr.normalizeFnAsync(this._tr.compileFileAsync(filename, options), cb);
@@ -231,9 +233,9 @@ Transformer.prototype.compileClient = function (str, options) {
 Transformer.prototype.compileClientAsync = function (str, options, cb) {
   if (!this.can('compileClientAsync')) {
     if (this.can('compileFileClientAsync')) {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client from a string.')).nodeify(cb);
+      return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support compiling for the client from a string.'));
     } else {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client')).nodeify(cb);
+      return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support compiling for the client'));
     }
   }
   if (this._hasMethod('compileClientAsync')) {
@@ -262,7 +264,7 @@ Transformer.prototype.compileFileClient = function (filename, options) {
 
 Transformer.prototype.compileFileClientAsync = function (filename, options, cb) {
   if (!this.can('compileFileClientAsync')) {
-    return Promise.reject(new Error('The Transform "' + this.name + '" does not support compiling for the client')).nodeify(cb)
+    return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support compiling for the client'))
   }
   if (this._hasMethod('compileFileClientAsync')) {
     return tr.normalizeAsync(this._tr.compileFileClientAsync(filename, options), cb);
@@ -312,9 +314,9 @@ Transformer.prototype.renderAsync = function (str, options, locals, cb) {
   }
   if (!this.can('renderAsync')) {
     if (this.can('renderFileAsync')) {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support rendering from a string.')).nodeify(cb);
+      return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support rendering from a string.'))
     } else {
-      return Promise.reject(new Error('The Transform "' + this.name + '" does not support rendering')).nodeify(cb);
+      return promiseOrCallback(cb, new Error('The Transform "' + this.name + '" does not support rendering'))
     }
   }
   if (this._hasMethod('renderAsync')) {

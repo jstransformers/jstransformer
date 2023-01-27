@@ -5,10 +5,6 @@
   "keywords": [
     "jstransformer"
   ],
-  "dependencies": {
-    "is-promise": "^2.0.0",
-    "promise": "^8.0.1"
-  },
   "devDependencies": {
     "testit": "^3.0.0"
   },

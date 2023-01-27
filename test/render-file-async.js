@@ -1,6 +1,5 @@
 'use strict';
 
-var Promise = require('promise');
 var assert = require('assert');
 var test = require('./test');
 var createTransformer = require('../');
