@@ -5,7 +5,6 @@
 <p align="center"><a href="https://travis-ci.org/jstransformers/jstransformer"><img src="https://img.shields.io/travis/jstransformers/jstransformer/master.svg" alt="Build Status"></a>
 <a href="https://david-dm.org/jstransformers/jstransformer"><img src="https://img.shields.io/david/jstransformers/jstransformer.svg" alt="Dependency Status"></a>
 <a href="https://david-dm.org/jstransformers/jstransformer#info=devDependencies"><img src="https://img.shields.io/david/dev/jstransformers/jstransformer.svg" alt="Developers' Dependency Status"></a>
-<a href="https://greenkeeper.io"><img src="https://badges.greenkeeper.io/jstransformers/jstransformer.svg" alt="Greenkeeper badge"></a>
 <a href="https://coveralls.io/r/jstransformers/jstransformer?branch=master"><img src="https://img.shields.io/coveralls/jstransformers/jstransformer/master.svg" alt="Coverage Status"></a>
 <a href="https://www.npmjs.org/package/jstransformer"><img src="https://img.shields.io/npm/v/jstransformer.svg" alt="NPM version"></a></p>
 
