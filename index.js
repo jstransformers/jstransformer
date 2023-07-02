@@ -360,16 +360,15 @@ Transformer.prototype.renderFileAsync = function (filename, options, locals, cb)
     return tr.normalizeAsync(this._tr.renderFileAsync(filename, options, locals), cb);
   } else if (this._hasMethod('renderFile')) {
     return tr.normalizeAsync(this._tr.renderFile(filename, options, locals), cb);
-  } else if (this._hasMethod('compile') || this._hasMethod('compileAsync')
-             || this._hasMethod('compileFile') || this._hasMethod('compileFileAsync')) {
-    return tr.normalizeAsync(this.compileFileAsync(filename, options).then(function (compiled) {
-      return {body: compiled.fn(locals || options), dependencies: compiled.dependencies};
-    }), cb);
-  } else { // render || renderAsync
+  } else if (this._hasMethod('render') || this._hasMethod('renderAsync')) { // render || renderAsync
     if (!options) options = {};
     if (options.filename === undefined) options.filename = filename;
     return tr.normalizeAsync(tr.readFile(filename, 'utf8').then(function (str) {
       return this.renderAsync(str, options, locals);
     }.bind(this)), cb);
-  }
+  } else {
+    return tr.normalizeAsync(this.compileFileAsync(filename, options).then(function (compiled) {
+    return {body: compiled.fn(locals || options), dependencies: compiled.dependencies};
+    }), cb);
+    }
 };
